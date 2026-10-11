@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+data/
+artifacts/
+
+fpga/quartus/db/
+fpga/quartus/incremental_db/
+fpga/quartus/output_files/

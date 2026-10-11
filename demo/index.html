@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tensor Accelerator · Digit Lab</title>
+<style>
+:root{font-family:Inter,Segoe UI,sans-serif;color:#ecf1fa;background:#101725;color-scheme:dark}*{box-sizing:border-box}body{margin:0}main{max-width:1000px;margin:65px auto;padding:0 24px}header{display:flex;justify-content:space-between;gap:24px;align-items:center}.eyebrow{font-size:12px;letter-spacing:.16em;color:#73ddc3}h1{font-size:42px;font-weight:600;letter-spacing:-.04em;margin:12px 0}p{color:#aebbd0;line-height:1.6}.tag{font-size:12px;border:1px solid #475471;border-radius:24px;padding:9px 13px;color:#d6c2ff;white-space:nowrap}.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}.card{background:#192337;border:1px solid #31405c;border-radius:18px;padding:28px}h2{font-size:18px;margin:0 0 22px}.canvas-wrap{display:flex;justify-content:center}#draw{background:#000;width:280px;height:280px;touch-action:none;border:1px solid #45516b;border-radius:8px;cursor:crosshair}.actions{display:flex;gap:12px;margin-top:22px}button,select{font:inherit;border:1px solid #475675;border-radius:9px;padding:10px 14px;background:#25344c;color:#e5ebf7}button{cursor:pointer}button:hover{border-color:#73ddc3}button:disabled{opacity:.5;cursor:wait}#predict{background:#73ddc3;color:#101b25;font-weight:600;border:0;flex:1}select{width:100%;margin-top:16px}.result{display:flex;align-items:center;gap:24px;margin:16px 0 30px}#digit{font-size:96px;line-height:1;font-weight:650;color:#73ddc3}#preview{background:black;width:84px;height:84px;image-rendering:pixelated;border:1px solid #45516b}.small{font-size:13px}#status{min-height:48px;color:#b8c8df}#bars{display:grid;gap:7px}.bar{display:grid;grid-template-columns:15px 1fr 32px;gap:9px;font-size:12px;align-items:center}.track{height:7px;background:#101725;border-radius:8px;overflow:hidden}.fill{height:100%;background:#7689b0}.winner .fill{background:#73ddc3}footer{margin:24px 0;font-size:12px;color:#8c9bb3}a{color:#73ddc3}@media(max-width:720px){main{margin:25px auto}header{display:block}.tag{display:inline-block}.grid{grid-template-columns:1fr}.card{padding:22px}h1{font-size:34px}}
+</style></head><body><main>
+<header><div><div class="eyebrow">TENSOR ACCELERATOR / DE10-LITE</div><h1>Draw. Run. Verify.</h1><p>Write one digit, large and centered. Inspect the exact input and prediction.</p></div><span class="tag">Physical FPGA · select a verified connection</span></header>
+<div class="grid"><section class="card"><h2>01 · Your digit</h2><div class="canvas-wrap"><canvas id="draw" width="280" height="280" aria-label="Draw a handwritten digit"></canvas></div>
+<div class="actions"><button id="clear">Clear</button><button id="sample">Example</button></div>
+<label class="small" for="backend"><p>Execution mode</p></label><select id="backend"><option value="software">CPU software · fast preview</option><option value="rtl">RTL simulation · native XSim</option></select>
+<div class="actions"><button id="predict">Run inference</button></div><p class="small" id="mode-note">RTL simulation can take several seconds. FPGA mode loads the model on its first run, then reuses it.</p></section>
+<section class="card"><h2>02 · Prediction & check</h2><div class="result"><div id="digit">—</div><div><canvas id="preview" width="28" height="28" aria-label="Actual 28 by 28 model input"></canvas><p class="small">Actual 28 × 28 input</p></div></div><div id="status" role="status">Draw a digit or load the example to begin.</div><p class="small" id="timing"></p><div id="bars"></div></section></div>
+<footer>784 → 64 → 32 → 10 · Signed INT8 · Every layer checked against an independent integer reference. Scores are logits, not probabilities.</footer>
+</main><script>
+fetch('/capabilities').then(r=>r.json()).then(c=>{document.querySelector('.tag').textContent=c.fpga?'Physical FPGA · persistent session enabled':'CPU / RTL simulation';if(c.fpga){const option=document.createElement('option');option.value='fpga';option.textContent='Physical FPGA · DE10-Lite';document.querySelector('#backend').append(option);document.querySelector('#backend').value='fpga'}}).catch(()=>{});
+const canvas=document.querySelector('#draw'),ctx=canvas.getContext('2d'),button=document.querySelector('#predict');
+function clear(){ctx.fillStyle='#000';ctx.fillRect(0,0,280,280)}clear();ctx.strokeStyle='#fff';ctx.lineWidth=20;ctx.lineCap='round';ctx.lineJoin='round';let drawing=false;
+function point(e){const r=canvas.getBoundingClientRect();return[(e.clientX-r.left)*280/r.width,(e.clientY-r.top)*280/r.height]}
+canvas.onpointerdown=e=>{drawing=true;canvas.setPointerCapture(e.pointerId);const[x,y]=point(e);ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+.01,y);ctx.stroke()};canvas.onpointermove=e=>{if(drawing){ctx.lineTo(...point(e));ctx.stroke()}};canvas.onpointerup=canvas.onpointercancel=()=>{drawing=false};
+document.querySelector('#clear').onclick=clear;
+function putGray(target,pixels,size){const c=target.getContext('2d'),im=c.createImageData(size,size);pixels.forEach((v,i)=>{im.data.set([v,v,v,255],i*4)});c.putImageData(im,0,0)}
+document.querySelector('#sample').onclick=async()=>{try{const data=await(await fetch('/sample')).json();const small=document.createElement('canvas');small.width=small.height=28;putGray(small,data.pixels,28);clear();ctx.drawImage(small,0,0,280,280)}catch(e){document.querySelector('#status').textContent=e.message}};
+button.onclick=async()=>{
+  button.disabled=true;
+  const status=document.querySelector('#status'),timing=document.querySelector('#timing'),bars=document.querySelector('#bars');
+  status.textContent='Running and checking each layer… First FPGA run includes connection and model loading.';
+  document.querySelector('#digit').textContent='—';timing.textContent='';bars.replaceChildren();
+  try{
+    const rgba=ctx.getImageData(0,0,280,280).data,pixels=[];
+    for(let i=0;i<rgba.length;i+=4)pixels.push(rgba[i]);
+    const response=await fetch('/predict',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pixels,width:280,height:280,backend:document.querySelector('#backend').value})});
+    const data=await response.json();if(!response.ok)throw Error(data.error);
+    document.querySelector('#digit').textContent=data.prediction;putGray(document.querySelector('#preview'),data.preview,28);
+    status.textContent=`Exact match · ${data.layers_checked} layers verified. ${data.backend}.`+(data.hex_display_updated?' HEX0 updated.':'');
+    const t=data.timings||{};
+    const lines=[`${data.elapsed_seconds}s host elapsed`];
+    if(data.physical_fpga){
+      lines.push(t.cold_start?`First run includes ${t.setup_seconds}s connection + model setup (${t.model_load_ms} ms model load).`:'Model reused · connection kept open.');
+      lines.push(`Input ${t.input_transfer_ms} ms · outputs ${t.output_transfer_ms} ms · reference ${t.reference_ms} ms`);
+      lines.push(`Board checks ${t.guard_ms} ms · start/poll ${t.compute_poll_ms} ms`);
+    }
+    if(data.compute_cycles){const mhz=data.compute_clock_mhz||50;lines.push(`${data.compute_cycles.toLocaleString()} ${data.physical_fpga?'FPGA':'simulated'} compute cycles · ${(data.compute_cycles/(mhz*1000)).toFixed(3)} ms at configured ${mhz} MHz`)}
+    timing.style.whiteSpace='pre-line';timing.textContent=lines.join('\n');
+    data.scores.forEach((score,i)=>{const row=document.createElement('div');row.className='bar'+(i===data.prediction?' winner':'');const label=document.createElement('span');label.textContent=i;const track=document.createElement('div');track.className='track';const fill=document.createElement('div');fill.className='fill';fill.style.width=`${(score+128)/255*100}%`;track.append(fill);const val=document.createElement('span');val.textContent=score;row.append(label,track,val);bars.append(row)});
+  }catch(e){status.textContent=`Inference failed: ${e.message}`}finally{button.disabled=false}
+};
+</script></body></html>
