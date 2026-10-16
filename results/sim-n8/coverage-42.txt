@@ -1,0 +1,202 @@
+
+ Xcrg Functional Coverage Report 
+
+ // To generate a more detailed report in html format, please run xcrg -dir <database> -report_format html -report_dir <dir>
+ // This is a text report also in CSV format. By exporting to Excel and using , as the delimiter, the data can be split into individual rows and columns
+ // This report contains 3 sections, Total Summary, CoverGroups Summary and CoverPoint Tables sections 
+ // In order to navigate to a CoverPoint's Table, the TableTag printed for the respective covergroup/instance can be grepped in this report
+ // For example, if covergroup name is g1 and coverpoint is cp1, the TableTag to go to the Group's CoverPoint Table summary is g1_cp1 
+ // For example, if covergroup name is g1, instance name is i1, coverpoint is cp1, the TableTag to go to the Instance's CoverPoint Table summary is g1_i1_cp1 
+
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: Total Summary ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+   Date             :, 10/15/26 18:17:55 British Columbia Daylight Time
+   User             :, jonat
+   Version          :, Vivado Simulator Coverage Report 2025.2
+   Command Line     :, C:/AMDDesignTools/2025.2/Vivado/bin/unwrapped/win64.o/xcrg.exe -cov_db_dir coverage -cov_db_name core_42 -report_dir coverage-42-20261015-181755 -report_format all 
+   Number of Tests  :, 1
+
+   Coverage Score            :, 100
+   Total Insts Score         :, 100
+   Total no of Cover Groups  :, 1
+   Total no of Instances     :, 1
+
+
+     CgName,                                           Score,      NumInsts,   AvgInstScore,   Weight,     Goal,       Merge Insts,    Get Inst Cov,   Per Inst,   AutoBinMax,     Comment,    
+
+       core_tb::functional                               ,100         ,1           ,100             ,1           ,100         ,0               ,0               ,0           ,64              ,            ,
+
+
+
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: CoverGroups Summary ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+Cover Group Details : core_tb::functional
+
+CgName,                                           Score,      NumInsts,   AvgInstScore,   Weight,     Goal,       Merge Insts,    Get Inst Cov,   Per Inst,   AutoBinMax,     Comment,    
+
+core_tb::functional                               ,100         ,1           ,100             ,1           ,100         ,0               ,0               ,0           ,64              ,            ,
+
+      Instances of CoverGroup - core_tb::functional
+
+             InstName,                                         Score,      Weight,     Goal,       AtLeast,    AutoBinMax, PrintMissing,   IsInst,     Comment,    
+             coverage                                          ,100         ,1           ,100         ,1           ,64          ,0               ,1           ,            ,
+
+
+      Instance coverage Cover Point Details 
+
+             Name,                                             TableTag,     Expected,   Uncovered,  Covered,    Percent,    Goal,       Weight,     AtLeast,    AutoBinMax, Comment,    
+             m                                                 ,functional_coverage_m,3           ,0           ,3           ,100         ,100         ,1           ,1           ,64          ,            ,
+             n                                                 ,functional_coverage_n,3           ,0           ,3           ,100         ,100         ,1           ,1           ,64          ,            ,
+             k                                                 ,functional_coverage_k,4           ,0           ,4           ,100         ,100         ,1           ,1           ,64          ,            ,
+             relu                                              ,functional_coverage_relu,2           ,0           ,2           ,100         ,100         ,1           ,1           ,64          ,            ,
+             row_tail                                          ,functional_coverage_row_tail,8           ,0           ,8           ,100         ,100         ,1           ,1           ,64          ,            ,
+             col_tail                                          ,functional_coverage_col_tail,8           ,0           ,8           ,100         ,100         ,1           ,1           ,64          ,            ,
+
+
+
+
+
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: CoverPoint Tables::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+ Cover Point Table for Inst : coverage, Variable :, m
+ Table tag :, functional_coverage_m
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   3           ,0           ,3           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      below       ,7           ,1           ,
+      full        ,2           ,1           ,
+      above       ,15          ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : coverage, Variable :, n
+ Table tag :, functional_coverage_n
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   3           ,0           ,3           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      below       ,6           ,1           ,
+      full        ,2           ,1           ,
+      above       ,16          ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : coverage, Variable :, k
+ Table tag :, functional_coverage_k
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   4           ,0           ,4           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      short_k     ,3           ,1           ,
+      four        ,1           ,1           ,
+      longer      ,19          ,1           ,
+      maximum     ,1           ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : coverage, Variable :, relu
+ Table tag :, functional_coverage_relu
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   2           ,0           ,2           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      off         ,12          ,1           ,
+      on          ,12          ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : coverage, Variable :, row_tail
+ Table tag :, functional_coverage_row_tail
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   8           ,0           ,8           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      tail_0      ,3           ,1           ,
+      tail_1      ,4           ,1           ,
+      tail_2      ,3           ,1           ,
+      tail_3      ,3           ,1           ,
+      tail_4      ,3           ,1           ,
+      tail_5      ,3           ,1           ,
+      tail_6      ,2           ,1           ,
+      tail_7      ,3           ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : coverage, Variable :, col_tail
+ Table tag :, functional_coverage_col_tail
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   8           ,0           ,8           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      tail_0      ,3           ,1           ,
+      tail_1      ,4           ,1           ,
+      tail_2      ,2           ,1           ,
+      tail_3      ,4           ,1           ,
+      tail_4      ,3           ,1           ,
+      tail_5      ,3           ,1           ,
+      tail_6      ,3           ,1           ,
+      tail_7      ,2           ,1           ,
+
+
+
+
+
+

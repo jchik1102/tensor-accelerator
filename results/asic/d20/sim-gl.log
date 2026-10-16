@@ -1,0 +1,5 @@
+WARNING: /mnt/c/projects/tensor-accelerator/asic/ta_asic_tile_tb.sv:42: $readmemh(waves.hex): Not enough words in the file for the requested range [0:8191].
+WARNING: /mnt/c/projects/tensor-accelerator/asic/ta_asic_tile_tb.sv:43: $readmemh(tests.hex): Not enough words in the file for the requested range [0:63].
+WARNING: /mnt/c/projects/tensor-accelerator/asic/ta_asic_tile_tb.sv:44: $readmemh(checks.hex): Not enough words in the file for the requested range [0:4095].
+TILE_PASS tests=24 lanes=1536
+/mnt/c/projects/tensor-accelerator/asic/ta_asic_tile_tb.sv:79: $finish called at 148180000 (1ps)

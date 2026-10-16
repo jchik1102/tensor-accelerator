@@ -1,0 +1,41 @@
+max slew
+
+Pin                                        Limit        Slew       Slack
+------------------------------------------------------------------------
+_1031_/Y                                0.750000    0.755878   -0.005878 (VIOLATED)
+_1036_/A2                               0.750000    0.755878   -0.005878 (VIOLATED)
+max_cap68/A                             0.750000    0.755878   -0.005878 (VIOLATED)
+
+max fanout
+
+Pin                                   Limit Fanout  Slack
+---------------------------------------------------------
+clkbuf_3_5__f_clk/X                      10     12     -2 (VIOLATED)
+
+
+
+===========================================================================
+report_parasitic_annotation -report_unannotated
+============================================================================
+Found 7 unannotated drivers.
+ clkload0/Y
+ clkload1/Y
+ clkload2/Y
+ clkload3/Y
+ clkload4/Y
+ clkload5/Y
+ clkload6/Y
+Found 0 partially unannotated drivers.
+
+===========================================================================
+max slew violation count 3
+max slew violation count 3
+max fanout violation count 1
+max fanout violation count 1
+max cap violation count 0
+max cap violation count 0
+============================================================================
+
+===========================================================================
+check_setup -verbose -unconstrained_endpoints -multiple_clock -no_clock -no_input_delay -loops -generated_clocks
+===========================================================================

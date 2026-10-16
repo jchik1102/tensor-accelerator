@@ -1,0 +1,102 @@
+START 2026-10-14T18:30:45.5438878-07:00 commit 7c65d0d85dafb7f430be54089b32ec1658867a44
+=== STEP pytest
+..................................                                       [100%]
+34 passed in 7.45s
+=== STEP_PASS pytest 8s
+=== STEP persistent_console
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/c/projects/tensor-accelerator/tests/check_persistent_console.py", line 15, in <module>
+    first=predict(MODEL,[4,2],'fpga',board=board)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/projects/tensor-accelerator/host/ta/runtime.py", line 91, in predict
+    actual,cycles,timings=board.infer(inputs)
+                          ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/projects/tensor-accelerator/host/ta/board_session.py", line 128, in infer
+    self._start()
+  File "/mnt/c/projects/tensor-accelerator/host/ta/board_session.py", line 113, in _start
+    ready = self._wait('ready.txt', self.startup_timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/projects/tensor-accelerator/host/ta/board_session.py", line 88, in _wait
+    raise TimeoutError('System Console response deadline exceeded')
+TimeoutError: System Console response deadline exceeded
+=== STEP_FAIL persistent_console 187s :: Python failed: 1
+=== STEP vectors
+=== STEP_PASS vectors 1s
+=== STEP board_plan
+Prepared /mnt/c/projects/tensor-accelerator/artifacts/board/inference.tcl; not executed. Expected digit: 7
+=== STEP_PASS board_plan 1s
+=== STEP board_tcl
+TRANSFER_PATTERN_PASS zero
+TRANSFER_PATTERN_PASS ones
+TRANSFER_PATTERN_PASS alternating
+TRANSFER_PATTERN_PASS seeded
+TRANSFER_MEASUREMENT bus_bytes=2080 elapsed_ms=0 seed=20261008
+TRANSFER_READBACK_PASS image=TA01 master=mock scratch=0x17f00 words=64
+OFFLINE_TCL_PASS scratch patterns/restoration, wrong-ID guard, source completeness; no hardware accessed
+=== STEP_PASS board_tcl 0s
+=== STEP sim_n4
+compile-clean exit=0
+elaborate-quant_tb-clean exit=0
+elaborate-core_tb-clean exit=0
+elaborate-adapter_tb-clean exit=0
+quant-clean exit=0
+adapter-clean exit=0
+core-1 exit=0
+coverage-1 exit=0
+core-42 exit=0
+coverage-42 exit=0
+core-20261008 exit=0
+coverage-20261008 exit=0
+=== STEP_PASS sim_n4 55s
+=== STEP sim_n8
+compile-clean exit=0
+elaborate-quant_tb-clean exit=0
+elaborate-core_tb-clean exit=0
+elaborate-adapter_tb-clean exit=0
+quant-clean exit=0
+adapter-clean exit=0
+core-1 exit=0
+coverage-1 exit=0
+core-42 exit=0
+coverage-42 exit=0
+core-20261008 exit=0
+coverage-20261008 exit=0
+=== STEP_PASS sim_n8 58s
+=== STEP mut_pe
+compile-pe exit=0
+elaborate-quant_tb-pe exit=0
+elaborate-core_tb-pe exit=0
+elaborate-adapter_tb-pe exit=0
+mutation-pe exit=0
+MUTATION_DETECTED pe
+=== STEP_PASS mut_pe 22s
+=== STEP mut_round
+compile-round exit=0
+elaborate-quant_tb-round exit=0
+elaborate-core_tb-round exit=0
+elaborate-adapter_tb-round exit=0
+mutation-round exit=0
+MUTATION_DETECTED round
+=== STEP_PASS mut_round 21s
+=== STEP mut_bank_n8
+compile-bank exit=0
+elaborate-quant_tb-bank exit=0
+elaborate-core_tb-bank exit=0
+elaborate-adapter_tb-bank exit=0
+mutation-bank exit=0
+MUTATION_DETECTED bank
+=== STEP_PASS mut_bank_n8 22s
+=== STEP replay_n4
+REPLAY_PASS seed=42 exact result, activity, gap counts and ordered gap digest
+=== STEP_PASS replay_n4 12s
+=== STEP hex_n8
+
+run.log:14:ADAPTER_PASS checks=56
+=== STEP_PASS hex_n8 7s
+=== STEP hex_n4_defect
+HEX_MUTATION_DETECTED digit3_segment_a
+=== STEP_PASS hex_n4_defect 7s
+END 2026-10-14T18:37:24.3231328-07:00 FAILED_STEPS=[persistent_console]
+EXIT=1

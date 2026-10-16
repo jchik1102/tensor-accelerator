@@ -1,0 +1,71 @@
+
+****** xsim v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Thu Oct 15 18:16:42 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/core_tb_clean/xsim_script.tcl
+# xsim {core_tb_clean} -cov_db_dir coverage -cov_db_name core_42 -autoloadwcfg -runall -sv_seed 42
+Time resolution is 1 ps
+run -all
+UVM_INFO C:AMDDesignToo  é5.2Vivado/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(18601) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+UVM-1.2
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+COMPUTE_CYCLES 62
+COMPUTE_CYCLES 127
+COMPUTE_CYCLES 251
+COMPUTE_CYCLES 611
+COMPUTE_CYCLES 707
+COMPUTE_CYCLES 579
+COMPUTE_CYCLES 2131
+COMPUTE_CYCLES 1031
+COMPUTE_CYCLES 62723
+COMPUTE_CYCLES 522
+COMPUTE_CYCLES 693
+COMPUTE_CYCLES 840
+COMPUTE_CYCLES 882
+COMPUTE_CYCLES 1214
+COMPUTE_CYCLES 1279
+COMPUTE_CYCLES 1320
+COMPUTE_CYCLES 1175
+COMPUTE_CYCLES 1320
+COMPUTE_CYCLES 1279
+COMPUTE_CYCLES 1214
+COMPUTE_CYCLES 882
+COMPUTE_CYCLES 840
+COMPUTE_CYCLES 693
+COMPUTE_CYCLES 522
+COMPUTE_CYCLES 32045
+COMPUTE_CYCLES 32045
+COMPUTE_CYCLES 32045
+COMPUTE_CYCLES 32045
+COMPUTE_CYCLES 32045
+COMPUTE_CYCLES 32045
+COMPUTE_CYCLES 32045
+COMPUTE_CYCLES 32045
+CORE_PASS checks=21264 transactions=107662 assertion_hits=107662 coverage=100.00 gaps=23733,28821,22889,32219 digest=00f9d157
+$finish called at time : 17718260 ns : File "C:/projects/tensor-accelerator/tb/core_tb.sv" Line 103
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:08 . Memory (MB): peak = 205.566 ; gain = 0.047
+exit
+INFO: [Common 17-206] Exiting xsim at Thu Oct 15 18:16:51 2026...
+EXIT_CODE=0

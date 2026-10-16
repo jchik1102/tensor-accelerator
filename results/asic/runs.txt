@@ -1,0 +1,17 @@
+ta_asic_tile (8x8 array, requantizer, output stage), 20 ns
+run       area_um2  setup_ws_ns    setup_vio   hold_ws_ns    drc_magic  drc_klayout          lvs antenna_nets     max_slew      max_cap   max_fanout
+p20         525976       -2.600           49        0.108            0            0            0           37          259           14          153
+d20         720432        1.486            0        0.035            0            0            0            2          639           79         3698
+n20         625746        2.056            0        0.107            0            0            0           60          237           58          194
+h20         654060        0.866            0        0.096            0            0            0           17          429           74         1136
+p20: baseline settings
+d20: SYNTH_STRATEGY=DELAY 1, RUN_POST_GRT_DESIGN_REPAIR=True, RUN_HEURISTIC_DIODE_INSERTION=True, GRT_ANTENNA_ITERS=10
+n20: SYNTH_STRATEGY=DELAY 1, RUN_POST_GRT_DESIGN_REPAIR=True, GRT_ANTENNA_ITERS=10
+h20: SYNTH_STRATEGY=DELAY 1, RUN_POST_GRT_DESIGN_REPAIR=True, RUN_HEURISTIC_DIODE_INSERTION=True, HEURISTIC_ANTENNA_THRESHOLD=200, GRT_ANTENNA_ITERS=10, DESIGN_REPAIR_MAX_SLEW_PCT=30, DESIGN_REPAIR_MAX_CAP_PCT=30, GRT_DESIGN_REPAIR_MAX_SLEW_PCT=20, GRT_DESIGN_REPAIR_MAX_CAP_PCT=20
+
+ta_pe (one processing element), 10 ns
+run       area_um2  setup_ws_ns    setup_vio   hold_ws_ns    drc_magic  drc_klayout          lvs antenna_nets     max_slew      max_cap   max_fanout
+pe10      7663.600       -0.257            3        0.110            0            0            0            0            0            0            2
+pe10d    10256.100        1.244            0        0.108            0            0            0            0            3            0            1
+pe10: baseline settings
+pe10d: SYNTH_STRATEGY=DELAY 1

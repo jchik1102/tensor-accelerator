@@ -1,0 +1,35 @@
+# What runs on GitHub-hosted runners: the Python tests and the ASIC tile's
+# RTL simulation against the Python reference (Icarus Verilog). The XSim
+# regression and Quartus builds need the Windows vendor tools, and the
+# OpenLane flow takes about 40 minutes; both run locally.
+name: CI
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  models:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-lock.txt --extra-index-url https://download.pytorch.org/whl/cpu
+      # tests/test_fpga_demo.py drives the mock board session through Quartus's
+      # Windows tclsh, so it runs only locally (make models).
+      - run: python -m pytest tests -q --ignore=tests/test_fpga_demo.py
+
+  asic-tile-sim:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: YosysHQ/setup-oss-cad-suite@v3
+        with:
+          version: '2026-10-14'
+      # run-tile-sim.sh only needs a Python with the repository's host package.
+      - run: VENV="$pythonLocation" bash asic/run-tile-sim.sh rtl

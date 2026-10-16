@@ -1,0 +1,10 @@
+{
+    "DESIGN_NAME": "ta_pe",
+    "VERILOG_FILES": ["dir::../../rtl/ta_pe.sv"],
+    "CLOCK_PORT": "clk",
+    "CLOCK_PERIOD": 10,
+    "FP_SIZING": "relative",
+    "FP_CORE_UTIL": 45,
+    "PL_TARGET_DENSITY_PCT": 55,
+    "SYNTH_STRATEGY": "DELAY 1"
+}

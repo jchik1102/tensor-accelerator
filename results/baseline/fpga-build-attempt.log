@@ -1,0 +1,38 @@
+=== build n8 Wed Oct 14 18:38:23 BCDT 2026
+2026.10.14.18:38:24 Info: Doing: <b>qsys-script --script=C:\projects\tensor-accelerator/fpga/board/create-jtag.tcl</b>
+Exception in thread "main" java.lang.NoClassDefFoundError: com/altera/sopclibrary/conan/ConanUtilsMessages
+	at com.altera.qsys.tcl.QsysScript.prepareEnsembleModel(QsysScript.java:577)
+	at com.altera.qsys.tcl.QsysScript.act(QsysScript.java:369)
+	at com.altera.utilities.AltCmdLineToolBase.runTheTool(AltCmdLineToolBase.java:720)
+	at com.altera.qsys.tcl.QsysScript.main(QsysScript.java:144)
+Caused by: java.lang.ClassNotFoundException: com.altera.sopclibrary.conan.ConanUtilsMessages
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:387)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:352)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
+	... 4 more
+Exception: C:\projects\tensor-accelerator\scripts\generate-jtag.ps1:9
+Line |
+   9 |      if($LASTEXITCODE -ne 0){throw 'JTAG system creation failed'}
+     |                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | JTAG system creation failed
+=== exit n8=1
+=== build n4 Wed Oct 14 18:38:24 BCDT 2026
+2026.10.14.18:38:25 Info: Doing: <b>qsys-script --script=C:\projects\tensor-accelerator/fpga/board/create-jtag.tcl</b>
+Exception in thread "main" java.lang.NoClassDefFoundError: com/altera/sopclibrary/conan/ConanUtilsMessages
+	at com.altera.qsys.tcl.QsysScript.prepareEnsembleModel(QsysScript.java:577)
+	at com.altera.qsys.tcl.QsysScript.act(QsysScript.java:369)
+	at com.altera.utilities.AltCmdLineToolBase.runTheTool(AltCmdLineToolBase.java:720)
+	at com.altera.qsys.tcl.QsysScript.main(QsysScript.java:144)
+Caused by: java.lang.ClassNotFoundException: com.altera.sopclibrary.conan.ConanUtilsMessages
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:387)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:352)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
+	... 4 more
+Exception: C:\projects\tensor-accelerator\scripts\generate-jtag.ps1:9
+Line |
+   9 |      if($LASTEXITCODE -ne 0){throw 'JTAG system creation failed'}
+     |                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | JTAG system creation failed
+=== exit n4=1

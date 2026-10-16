@@ -1,0 +1,11 @@
+{
+  "model_json_sha256": "8e25d12fbab0bda949b0243287e833a7c3e9b948e2e712da6115933dcb11eb80",
+  "weights_sha256": "e233dae1d3582173af446c07d9f363dbd66c12ed9bdc7dd57cadc73c7bf3e3c8",
+  "preprocessing": "ink20-com-v1",
+  "validation_examples": 5000,
+  "validation_accuracy": 0.9775999784469604,
+  "test_examples": 10000,
+  "float_test_accuracy": 0.9740999937057495,
+  "int8_test_accuracy": 0.9749,
+  "int8_loss": -0.0008000062942504771
+}

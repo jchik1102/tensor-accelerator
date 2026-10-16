@@ -4,8 +4,19 @@ __pycache__/
 .pytest_cache/
 
 data/
-artifacts/
+# Build outputs; the trained model is versioned because the hex images,
+# accuracy results and tests are built from it.
+artifacts/*
+!artifacts/model/
 
 fpga/quartus/db/
 fpga/quartus/incremental_db/
 fpga/quartus/output_files/
+# Committed evidence: logs and reports that back README numbers
+!results/
+!results/**
+
+# OpenLane run directories (summaries are copied to results/asic/)
+asic/runs/
+asic/pe/runs/
+slpp_all/

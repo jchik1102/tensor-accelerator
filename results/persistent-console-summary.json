@@ -1,0 +1,7 @@
+{
+  "scope": "installed System Console with mocked bus; no hardware access",
+  "one_connection": true,
+  "one_model_load": true,
+  "two_distinct_inputs_verified": true,
+  "clean_close": true
+}

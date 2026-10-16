@@ -1,0 +1,24 @@
+Fitter Status : Successful - Thu Oct 15 18:25:47 2026
+Quartus Prime Version : 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
+Revision Name : de10_lite
+Top-level Entity Name : de10_lite_top
+Family : MAX 10
+Device : 10M50DAF484C7G
+Timing Models : Final
+Total logic elements : 8,901 / 49,760 ( 18 % )
+    Total combinational functions : 8,080 / 49,760 ( 16 % )
+    Dedicated logic registers : 4,453 / 49,760 ( 9 % )
+Total registers : 4453
+Total pins : 50 / 360 ( 14 % )
+Total virtual pins : 0
+Total memory bits : 885,248 / 1,677,312 ( 53 % )
+Embedded Multiplier 9-bit elements : 29 / 288 ( 10 % )
+Total PLLs : 1 / 4 ( 25 % )
+UFM blocks : 0 / 1 ( 0 % )
+ADC blocks : 0 / 2 ( 0 % )
+TIMING_PASS minimum_reported_slack_ns=0.134
+
+[32;1mAlgorithm : [0mSHA256
+[32;1mHash      : [0m2F356CB4E5C36FCAE414BB1EED800BE0F98DB430C7FD0553387F42F54C05A4FB
+[32;1mPath      : [0mC:\projects\tensor-accelerator\artifacts\board-n4-75-repro\output_files\de10_lite.sof
+
