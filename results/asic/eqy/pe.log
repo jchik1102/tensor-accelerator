@@ -1,0 +1,34 @@
+EQY 20:37:28 [pe] read_gold: starting process "yosys -ql pe/gold.log pe/gold.ys"
+EQY 20:37:28 [pe] read_gold: finished (returncode=0)
+EQY 20:37:28 [pe] read_gate: starting process "yosys -ql pe/gate.log pe/gate.ys"
+EQY 20:37:29 [pe] read_gate: finished (returncode=0)
+EQY 20:37:29 [pe] combine: starting process "yosys -ql pe/combine.log pe/combine.ys"
+EQY 20:37:29 [pe] combine: finished (returncode=0)
+EQY 20:37:29 [pe] partition: starting process "cd pe; yosys -ql partition.log partition.ys"
+EQY 20:37:30 [pe] partition: finished (returncode=0)
+EQY 20:37:30 [pe] run: starting process "make -j16 -C pe -f strategies.mk"
+EQY 20:37:30 [pe] run: make: Entering directory '/mnt/c/projects/tensor-accelerator/build/eqy/pe/pe'
+EQY 20:37:30 [pe] run: Running strategy 'sby' on 'ta_pe.a_out'..
+EQY 20:37:30 [pe] run: Running strategy 'sby' on 'ta_pe.b_out'..
+EQY 20:37:30 [pe] run: Running strategy 'sby' on 'ta_pe.product.0'..
+EQY 20:37:30 [pe] run: Running strategy 'sby' on 'ta_pe.product_valid'..
+EQY 20:37:30 [pe] run: Running strategy 'sby' on 'ta_pe.sum'..
+EQY 20:37:31 [pe] run: Proved equivalence of partition 'ta_pe.product_valid' using strategy 'sby'
+EQY 20:37:31 [pe] run: Proved equivalence of partition 'ta_pe.a_out' using strategy 'sby'
+EQY 20:37:31 [pe] run: Proved equivalence of partition 'ta_pe.b_out' using strategy 'sby'
+EQY 20:37:31 [pe] run: Proved equivalence of partition 'ta_pe.sum' using strategy 'sby'
+EQY 20:37:46 [pe] run: Proved equivalence of partition 'ta_pe.product.0' using strategy 'sby'
+EQY 20:37:46 [pe] run: make -f strategies.mk summary
+EQY 20:37:46 [pe] run: make[1]: Entering directory '/mnt/c/projects/tensor-accelerator/build/eqy/pe/pe'
+EQY 20:37:46 [pe] run: make[1]: Leaving directory '/mnt/c/projects/tensor-accelerator/build/eqy/pe/pe'
+EQY 20:37:46 [pe] run: make: Leaving directory '/mnt/c/projects/tensor-accelerator/build/eqy/pe/pe'
+EQY 20:37:46 [pe] run: finished (returncode=0)
+EQY 20:37:46 [pe] Successfully proved equivalence of partition ta_pe.sum
+EQY 20:37:46 [pe] Successfully proved equivalence of partition ta_pe.product_valid
+EQY 20:37:46 [pe] Successfully proved equivalence of partition ta_pe.product.0
+EQY 20:37:46 [pe] Successfully proved equivalence of partition ta_pe.b_out
+EQY 20:37:46 [pe] Successfully proved equivalence of partition ta_pe.a_out
+EQY 20:37:46 [pe] Successfully proved designs equivalent
+EQY 20:37:46 [pe] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:17 (17)
+EQY 20:37:46 [pe] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:17 (17)
+EQY 20:37:46 [pe] DONE (PASS, rc=0)

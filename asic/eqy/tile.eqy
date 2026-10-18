@@ -1,0 +1,39 @@
+# Equivalence of the ASIC compute tile's RTL (gold: asic/ta_asic_tile.sv with
+# rtl/ta_array.sv, ta_pe.sv and ta_requant.sv, N=8, elaborated by Synlig) and
+# its OpenLane netlist
+# (gate, sky130_fd_sc_hd cells, functions read from the liberty file). Run by
+# asic/eqy/run.sh, which fills in LIB and NETLIST; stubs.v holds empty modules
+# for the fill, tap and decap cells (asic/eqy/netlist_stubs.py).
+[gold]
+# The RTL as Synlig elaborates it (asic/eqy/gold_synlig.ys), the frontend the
+# flow used. Read with Yosys's frontends, the flattened wire arrays between
+# the PEs come out numbered differently from the netlist's, so registers named
+# after them could not be matched.
+read_rtlil gold_synlig.il
+# Name internal bits like the netlist does (product[3]), so EQY matches them.
+splitnets
+
+[gate]
+read_liberty -ignore_miss_func LIB
+read_verilog stubs.v
+read_verilog NETLIST
+hierarchy -top ta_asic_tile
+flatten
+# What is left of the cell library after flattening is the cells with no
+# logic (fill, tap, decap): delete their instances and their (boxed) modules.
+delete t:sky130_*
+delete =A:blackbox
+hierarchy -top ta_asic_tile
+opt_clean
+splitnets -driver
+
+[match *]
+# Every PE's product_valid register holds the same value (each is advance,
+# delayed one cycle), and synthesis kept only the one in PE (0,0).
+gold-match /array_unit\.rows\[[0-7]\]\.cols\[[0-7]\]\.pe\.product_valid/ array_unit.rows[0].cols[0].pe.product_valid
+
+[strategy sby]
+use sby
+depth 3
+timeout 1800
+engine smtbmc bitwuzla

@@ -1,0 +1,290 @@
+.F                                                                       [100%]
+================================== FAILURES ===================================
+__________________________________ test_tile __________________________________
+
+    def test_tile():
+>       run("ta_asic_tile", ["rtl/ta_pe.sv", "rtl/ta_array.sv", "rtl/ta_requant.sv", "asic/ta_asic_tile.sv"], "tile_tests")
+
+tb\cocotb\test_cocotb.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+top = 'ta_asic_tile'
+sources = ['rtl/ta_pe.sv', 'rtl/ta_array.sv', 'rtl/ta_requant.sv', 'asic/ta_asic_tile.sv']
+module = 'tile_tests'
+
+    def run(top, sources, module):
+        runner = get_runner(SIM)
+        build = HERE / "sim_build" / (top if SIM == "icarus" else f"{SIM}_{top}")
+        runner.build(sources=[ROOT / s for s in sources], hdl_toplevel=top, build_dir=build,
+                     build_args=["-g2012"] if SIM == "icarus" else [], defines={MUTATION: 1} if MUTATION else {}, always=True)
+        # Questa finds the compiled library in its working directory, so it runs in the build directory.
+>       runner.test(hdl_toplevel=top, test_module=module, test_dir=HERE if SIM == "icarus" else build, build_dir=build)
+E       SystemExit: 1
+
+tb\cocotb\test_cocotb.py:31: SystemExit
+---------------------------- Captured stdout call -----------------------------
+** Warning: (vlib-34) Library already exists at "top".
+
+Errors: 0, Warnings: 1
+
+** Warning: C:\projects\tensor-accelerator\rtl\ta_array.sv(4): (vlog-13314) Defaulting port 'left' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+
+** Warning: C:\projects\tensor-accelerator\rtl\ta_array.sv(4): (vlog-13314) Defaulting port 'top' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+
+Reading pref.tcl
+
+
+
+# 2024.3
+
+
+
+# vsim -quiet -c -onfinish exit -pli "C:/Users/jonat/.venvs/cocotb-win/Lib/site-packages/cocotb/libs/cocotbvpi_modelsim.dll" top.ta_asic_tile -do "run -all; quit" 
+
+# Start time: 15:15:38 on Oct 17,2026
+
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+
+# ** Warning: (vsim-3865) Due to PLI being present, global +acc is being enabled automatically. This will cause your simulation to run very slowly. Please use vsim -no_autoacc to disable this feature. This feature is now deprecated and will be removed from future releases.
+
+# ** Warning: (vopt-10908) Some optimizations are turned off because the +acc switch is in effect.
+
+# ** Warning: C:\projects\tensor-accelerator\rtl\ta_array.sv(4): (vopt-13314) Defaulting port 'left' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+
+# ** Warning: C:\projects\tensor-accelerator\rtl\ta_array.sv(4): (vopt-13314) Defaulting port 'top' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+
+# ** Note: (vopt-143) Recognized 1 FSM in module "ta_requant(fast)".
+
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=4.
+
+# //  Questa Intel Starter FPGA Edition-64
+
+# //  Version 2024.3 win64 Sep 10 2024
+
+# //
+
+# // Unpublished work. Copyright 2024 Siemens
+
+# //
+
+# // This material contains trade secrets or otherwise confidential information
+
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+
+# // limited as set forth in the Customer's applicable agreements with SISW.
+
+# //
+
+# // This material may not be copied, distributed, or otherwise disclosed outside
+
+# // of the Customer's facilities without the express written permission of SISW,
+
+# // and may not be used in any way not expressly authorized by SISW.
+
+# //
+
+#      -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: 'C:\Users\jonat\AppData\Local\Programs\Python\Python313\python313.dll'
+
+#      -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:234  in gpi_load_users                  Running entry func 'initialize' from loaded library 'C:\Users\jonat\.venvs\cocotb-win\Lib\site-packages\cocotb\simulator.cp313-win_amd64.pyd'
+
+#      -.--ns INFO     pygpi                              ..ib\pygpi\embed.cpp:115  in initialize                      Using Python 3.13.8 interpreter at C:\Users\jonat\.venvs\cocotb-win\Scripts\python.exe
+
+#      -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+
+#      -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: FLI support registered
+
+# run -all
+
+#      0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1792275340
+
+# 
+
+#      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from C:\Users\jonat\.venvs\cocotb-win\Lib\site-packages\cocotb
+
+# 
+
+#      0.00ns INFO     cocotb.initialize                  Running on ModelSim for Questa Intel Starter FPGA Edition-64 version 2024.1 2024.09
+
+# 
+
+#      0.00ns INFO     cocotb.regression                  Running tests
+
+# 
+
+#      0.00ns INFO     cocotb.regression                  running tile_tests.extreme_operands (1/3)
+
+# 
+
+#                                                             All -128 x -128 and 127 x -128 products at K = 64: the largest accumulator magnitudes.
+
+# 
+
+#   1975.00ns WARNING  cocotb.regression                  tile_tests.extreme_operands failed
+
+# 
+
+#                                                         Traceback (most recent call last):
+
+# 
+
+#                                                           File "C:\projects\tensor-accelerator\tb\cocotb\tile_tests.py", line 114, in extreme_operands
+
+# 
+
+#                                                             assert acc == 64 * av * bv, f"lane {lane}: {acc}"
+
+# 
+
+#                                                         AssertionError: lane 0: 1056768
+
+# 
+
+#                                                         assert 1056768 == ((64 * 127) * -128)
+
+# 
+
+#   1975.00ns INFO     cocotb.regression                  running tile_tests.random_products (2/3)
+
+# 
+
+#                                                             Random sizes K = 1..64 with random bias, multiplier, shift and ReLU on every lane.
+
+# 
+
+#   2430.00ns WARNING  cocotb.regression                  tile_tests.random_products failed
+
+# 
+
+#                                                         Traceback (most recent call last):
+
+# 
+
+#                                                           File "C:\projects\tensor-accelerator\tb\cocotb\tile_tests.py", line 122, in random_products
+
+# 
+
+#                                                             lanes = await run_products(dut, random.Random(20261016), products=8, max_k=64)
+
+# 
+
+#                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+# 
+
+#                                                           File "C:\projects\tensor-accelerator\tb\cocotb\tile_tests.py", line 97, in run_products
+
+# 
+
+#                                                             assert acc == total + bias, f"product {t} lane {lane}: acc {acc} != {total + bias}"
+
+# 
+
+#                                                         AssertionError: product 0 lane 0: acc -187024675 != -187385123
+
+# 
+
+#                                                         assert -187024675 == (-36905 + -187348218)
+
+# 
+
+#   2430.00ns INFO     cocotb.regression                  running tile_tests.clear_between_products (3/3)
+
+# 
+
+#                                                             Back-to-back products must not leak accumulators: clear resets every PE.
+
+# 
+
+#   2735.00ns WARNING  cocotb.regression                  tile_tests.clear_between_products failed
+
+# 
+
+#                                                         Traceback (most recent call last):
+
+# 
+
+#                                                           File "C:\projects\tensor-accelerator\tb\cocotb\tile_tests.py", line 131, in clear_between_products
+
+# 
+
+#                                                             lanes = await run_products(dut, rng, products=3, max_k=4)
+
+# 
+
+#                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+# 
+
+#                                                           File "C:\projects\tensor-accelerator\tb\cocotb\tile_tests.py", line 97, in run_products
+
+# 
+
+#                                                             assert acc == total + bias, f"product {t} lane {lane}: acc {acc} != {total + bias}"
+
+# 
+
+#                                                         AssertionError: product 0 lane 0: acc -1795806988 != -1795872524
+
+# 
+
+#                                                         assert -1795806988 == (-2636 + -1795869888)
+
+# 
+
+#   2735.00ns INFO     cocotb.regression                  *******************************************************************************************
+
+# 
+
+#                                                         ** TEST                               STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+
+# 
+
+#                                                         *******************************************************************************************
+
+# 
+
+#                                                         ** tile_tests.extreme_operands         FAIL        1975.00           0.07      27419.97  **
+
+# 
+
+#                                                         ** tile_tests.random_products          FAIL         455.00           0.00     153799.35  **
+
+# 
+
+#                                                         ** tile_tests.clear_between_products   FAIL         305.00           0.00     204918.03  **
+
+# 
+
+#                                                         *******************************************************************************************
+
+# 
+
+#                                                         ** TESTS=3 PASS=0 FAIL=3 SKIP=0                    2735.00           0.23      11993.36  **
+
+# 
+
+#                                                         *******************************************************************************************
+
+# 
+
+# ** Note: $finish
+
+#    Time: 2735002 ps  Iteration: 2  Instance: /ta_asic_tile File: C:/projects/tensor-accelerator/asic/ta_asic_tile.sv
+
+# End time: 15:15:40 on Oct 17,2026, Elapsed time: 0:00:02
+
+# Errors: 0, Warnings: 4
+
+------------------------------ Captured log call ------------------------------
+INFO     Questa:runner.py:734 Running command vlib top in directory C:\projects\tensor-accelerator\tb\cocotb\sim_build\questa_ta_asic_tile
+INFO     Questa:runner.py:734 Running command vlog -quiet -work top -sv +define+TA_MUTATE_PE=1 'C:\projects\tensor-accelerator\rtl\ta_pe.sv' in directory C:\projects\tensor-accelerator\tb\cocotb\sim_build\questa_ta_asic_tile
+INFO     Questa:runner.py:734 Running command vlog -quiet -work top -sv +define+TA_MUTATE_PE=1 'C:\projects\tensor-accelerator\rtl\ta_array.sv' in directory C:\projects\tensor-accelerator\tb\cocotb\sim_build\questa_ta_asic_tile
+INFO     Questa:runner.py:734 Running command vlog -quiet -work top -sv +define+TA_MUTATE_PE=1 'C:\projects\tensor-accelerator\rtl\ta_requant.sv' in directory C:\projects\tensor-accelerator\tb\cocotb\sim_build\questa_ta_asic_tile
+INFO     Questa:runner.py:734 Running command vlog -quiet -work top -sv +define+TA_MUTATE_PE=1 'C:\projects\tensor-accelerator\asic\ta_asic_tile.sv' in directory C:\projects\tensor-accelerator\tb\cocotb\sim_build\questa_ta_asic_tile
+INFO     Questa:runner.py:734 Running command vsim -quiet -c -onfinish exit -pli C:/Users/jonat/.venvs/cocotb-win/Lib/site-packages/cocotb/libs/cocotbvpi_modelsim.dll top.ta_asic_tile -do 'run -all; quit' in directory C:\projects\tensor-accelerator\tb\cocotb\sim_build\questa_ta_asic_tile
+ERROR    Questa:runner.py:674 ERROR: Failed 3 of 3 tests.
+=========================== short test summary info ===========================
+FAILED tb/cocotb/test_cocotb.py::test_tile - SystemExit: 1
+1 failed, 1 passed in 32.31s

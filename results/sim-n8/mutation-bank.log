@@ -3,7 +3,7 @@
   **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
   **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
   **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-  **** Start of session at: Thu Oct 15 18:19:08 2026
+  **** Start of session at: Sat Oct 17 15:14:27 2026
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 
@@ -34,8 +34,8 @@ UVM-1.2
 COMPUTE_CYCLES 166
 COMPUTE_CYCLES 231
 Fatal: MISMATCH line=73 addr=00014004 expected=00000000 actual=xxxxxxxx
-Time: 16180 ns  Iteration: 0  Process: /core_tb/Initial62_338  Scope: core_tb  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 78
+Time: 16180 ns  Iteration: 0  Process: /core_tb/Initial130_339  Scope: core_tb  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 147
 $finish called at time : 16180 ns
 exit
-INFO: [Common 17-206] Exiting xsim at Thu Oct 15 18:19:11 2026...
+INFO: [Common 17-206] Exiting xsim at Sat Oct 17 15:14:29 2026...
 EXIT_CODE=0

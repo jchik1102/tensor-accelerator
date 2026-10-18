@@ -1,0 +1,7 @@
+Recoding FSM `$fsm$\quant_unit.phase$614' from module `\ta_asic_tile' using `auto' encoding:
+  mapping auto encoding to `one-hot` for this FSM.
+  000 -> ----1
+  100 -> ---1-
+  010 -> --1--
+  001 -> -1---
+  011 -> 1----

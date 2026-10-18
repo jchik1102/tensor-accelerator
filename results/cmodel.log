@@ -1,0 +1,31 @@
+gmake[1]: Entering directory '/mnt/c/projects/tensor-accelerator/build/cmodel'
+gmake[2]: Entering directory '/mnt/c/projects/tensor-accelerator/build/cmodel'
+gmake[3]: Entering directory '/mnt/c/projects/tensor-accelerator/build/cmodel'
+gmake[3]: Leaving directory '/mnt/c/projects/tensor-accelerator/build/cmodel'
+[ 25%] Built target ta_model
+gmake[3]: Entering directory '/mnt/c/projects/tensor-accelerator/build/cmodel'
+gmake[3]: Entering directory '/mnt/c/projects/tensor-accelerator/build/cmodel'
+gmake[3]: Entering directory '/mnt/c/projects/tensor-accelerator/build/cmodel'
+gmake[3]: Leaving directory '/mnt/c/projects/tensor-accelerator/build/cmodel'
+[ 50%] Built target test_core
+gmake[3]: Leaving directory '/mnt/c/projects/tensor-accelerator/build/cmodel'
+gmake[3]: Leaving directory '/mnt/c/projects/tensor-accelerator/build/cmodel'
+[100%] Built target test_requant
+[100%] Built target test_replay
+gmake[2]: Leaving directory '/mnt/c/projects/tensor-accelerator/build/cmodel'
+gmake[1]: Leaving directory '/mnt/c/projects/tensor-accelerator/build/cmodel'
+1: requantization cases from /mnt/c/projects/tensor-accelerator/artifacts/vectors/quant.txt: 2070
+1: TEST_PASS test_requant checks=2082 failures=0
+1/4 Test #1: requant ..........................   Passed    0.02 sec
+2: array 4x4: one-layer job 1383 cycles
+2: array 8x8: one-layer job 3462 cycles
+2: TEST_PASS test_core checks=4338 failures=0
+2/4 Test #2: core .............................   Passed    0.01 sec
+3: replayed 99986 lines: 21152 reads, 112 jobs polled
+3: TEST_PASS test_replay checks=121182 failures=0
+3/4 Test #3: replay_4x4 .......................   Passed    0.21 sec
+4: replayed 99986 lines: 21152 reads, 112 jobs polled
+4: TEST_PASS test_replay checks=121182 failures=0
+4/4 Test #4: replay_8x8 .......................   Passed    0.21 sec
+100% tests passed, 0 tests failed out of 4
+CMODEL_PASS g++ 13.3.0, cmake 3.28.3

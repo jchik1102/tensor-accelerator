@@ -26,7 +26,7 @@ RESULTS := results
 require = grep -qE '$(1)' $(2) || { echo "FAIL: '$(1)' not found in $(2)"; exit 1; }
 LOG = 2>&1 | tee $(RESULTS)/$@.log
 
-.PHONY: help models test accuracy fpga results formal asic asic-pe asic-sim results-dir
+.PHONY: help models test accuracy fpga results formal asic asic-pe asic-sim asic-eqy cocotb vivado cmodel questa results-dir
 
 help:
 	@echo "make models   Python tests (WSL only, seconds)"
@@ -34,9 +34,14 @@ help:
 	@echo "make accuracy MNIST INT8 accuracy (original and synthetic variants), float and validation accuracy"
 	@echo "make results  copy logs that back the README into results/"
 	@echo "make fpga     scripts/build-upgrade.ps1 -ArrayN $(ARRAY_N) -CoreMHz 75 -Variant $(VARIANT)"
+	@echo "make vivado   Vivado implementation of ta_core (4x4, 8x8) for an Artix-7 at 75 MHz"
+	@echo "make cocotb   cocotb tests (requantizer, 8x8 tile) with Icarus, then check they fail on the RTL mutations"
+	@echo "make cmodel   C++ model of ta_core (cmodel/): CMake build and unit tests (also run by make test)"
+	@echo "make questa   what runs in Questa Starter: quant_tb, adapter_tb, round mutant, cocotb and its mutations"
 	@echo "make asic     OpenLane 2 flow on the compute tile (RUN_TAG=$(RUN_TAG)), then collect reports"
 	@echo "make asic-pe  OpenLane 2 flow on one processing element (10 ns)"
 	@echo "make asic-sim tile RTL and gate-level simulation against the Python reference"
+	@echo "make asic-eqy equivalence of RTL and routed netlist (EQY): one PE, and the compute tile"
 	@echo "make formal   not available yet"
 
 # Not "$(RESULTS):": that is the same target as "results:" below, whose
@@ -86,3 +91,43 @@ asic-sim: | results-dir
 	cp artifacts/asic/sim-rtl/sim.log $(RESULTS)/asic/$(RUN_TAG)/sim-rtl.log
 	bash asic/run-tile-sim.sh gl asic/runs/$(RUN_TAG)/final/nl/ta_asic_tile.nl.v
 	cp artifacts/asic/sim-gl/sim.log $(RESULTS)/asic/$(RUN_TAG)/sim-gl.log
+
+# EQY equivalence of the RTL and the routed OpenLane netlists: the single-PE
+# run (pe10d) and the tile run (RUN_TAG); logs in results/asic/eqy/. Needs
+# OSS CAD Suite (EQY, GHDL not needed) and the OpenLane image for Synlig.
+asic-eqy: | results-dir
+	bash asic/eqy/run.sh $(RUN_TAG)
+	@$(call require,^EQY_PE PASS,$(RESULTS)/asic/eqy/summary.txt)
+
+# cocotb testbenches (tb/cocotb) with Icarus Verilog, then the same tests on
+# the RTL's built-in PE and rounding mutations, each of which must fail.
+COCOTB_ENV = PATH="$(VENV)/bin:$(HOME)/oss-cad-suite/bin:$$PATH"
+cocotb: | results-dir
+	$(COCOTB_ENV) python -m pytest tb/cocotb -v -s 2>&1 | tee $(RESULTS)/cocotb.log
+	@for m in TA_MUTATE_PE TA_MUTATE_ROUND; do 	  if $(COCOTB_ENV) TA_MUTATION=$$m python -m pytest tb/cocotb -q > $(RESULTS)/cocotb-$$m.log 2>&1; then 	    echo "FAIL: cocotb tests pass on $$m"; exit 1; else echo "COCOTB_MUTATION_DETECTED $$m"; fi; 	 done 2>&1 | tee -a $(RESULTS)/cocotb.log
+	@$(call require,^COCOTB_MUTATION_DETECTED TA_MUTATE_ROUND,$(RESULTS)/cocotb.log)
+
+# Out-of-context Vivado implementation of ta_core (4x4 and 8x8) for a Xilinx
+# Artix-7 (xc7a100tcsg324-1) at 75 MHz; reports copied to results/vivado/.
+vivado: | results-dir
+	for n in 4 8; do $(PS) scripts/run-vivado.ps1 -ArrayN $$n 2>&1 | tee $(RESULTS)/vivado-n$$n.log; 	  mkdir -p $(RESULTS)/vivado/n$$n; 	  cp build/vivado/n$$n/{result.txt,utilization.txt,utilization_hierarchy.txt,timing_summary.txt,worst_setup_path.txt} $(RESULTS)/vivado/n$$n/; done
+	@$(call require,^VIVADO_PASS,$(RESULTS)/vivado/n4/result.txt)
+	@$(call require,^VIVADO_PASS,$(RESULTS)/vivado/n8/result.txt)
+
+# C++ model of ta_core (cmodel/), built with CMake; its unit tests replay the
+# vector files (artifacts/vectors, from python -m host.ta.vectors). The same
+# model is core_tb's scoreboard through DPI-C (scripts/run-sim.ps1).
+cmodel: | results-dir
+	bash scripts/run-cmodel.sh 2>&1 | tee $(RESULTS)/cmodel.log
+	@$(call require,^CMODEL_PASS,$(RESULTS)/cmodel.log)
+
+# Questa Intel Starter FPGA Edition (Windows): quant_tb and adapter_tb (4x4 and
+# 8x8), the round mutation, and the cocotb tests with both mutations. core_tb
+# (UVM) needs randomize() and covergroups, which the Starter licence refuses.
+# Logs in results/questa/.
+questa: | results-dir
+	$(PS) scripts/run-questa.ps1 $(LOG)
+	mkdir -p $(RESULTS)/questa
+	cp artifacts/questa/summary.txt artifacts/questa/cocotb*.log $(RESULTS)/questa/
+	for d in artifacts/questa_*/; do cp $$d/sim.log $(RESULTS)/questa/$$(basename $$d | sed 's/^questa_//').log; done
+	@$(call require,^QUESTA_PASS,$(RESULTS)/$@.log)

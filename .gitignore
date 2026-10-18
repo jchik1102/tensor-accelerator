@@ -20,3 +20,10 @@ fpga/quartus/output_files/
 asic/runs/
 asic/pe/runs/
 slpp_all/
+
+# cocotb build output
+tb/cocotb/sim_build/
+tb/cocotb/*.result.xml
+
+# Vivado and other local build output
+build/

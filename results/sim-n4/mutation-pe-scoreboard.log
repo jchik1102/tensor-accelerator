@@ -1,0 +1,112 @@
+
+****** xsim v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Sat Oct 17 15:13:29 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/core_tb_pe/xsim_script.tcl
+# xsim {core_tb_pe} -testplusarg SCOREBOARD_ONLY -autoloadwcfg -runall -sv_seed 42
+Time resolution is 1 ps
+run -all
+UVM_INFO C:AMDDesignToo  é5.2Vivado/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(18601) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+UVM-1.2
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+COMPUTE_CYCLES 62
+Error: MODEL_MISMATCH edge=241  read addr=00014000 wdata=00000000: RTL error=0 rdata=0000007f, C++ model error=0 rdata=ffffff80
+Time: 4850 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=247  read addr=00060000 wdata=00000000: RTL error=0 rdata=000040b1, C++ model error=0 rdata=ffffc0b1
+Time: 4970 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+COMPUTE_CYCLES 127
+Error: MODEL_MISMATCH edge=582  read addr=00014000 wdata=00000000: RTL error=0 rdata=0000007f, C++ model error=0 rdata=00000000
+Time: 11670 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=588  read addr=00060000 wdata=00000000: RTL error=0 rdata=0000a337, C++ model error=0 rdata=ffffa337
+Time: 11790 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=594  read addr=00014004 wdata=00000000: RTL error=0 rdata=0000007f, C++ model error=0 rdata=00000000
+Time: 11910 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=597  read addr=00060004 wdata=00000000: RTL error=0 rdata=0000c737, C++ model error=0 rdata=ffffc737
+Time: 11970 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=600  read addr=00014008 wdata=00000000: RTL error=0 rdata=0000007f, C++ model error=0 rdata=00000000
+Time: 12030 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=605  read addr=00060008 wdata=00000000: RTL error=0 rdata=0000f4d5, C++ model error=0 rdata=fffff4d5
+Time: 12130 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=608  read addr=0001400c wdata=00000000: RTL error=0 rdata=0000007f, C++ model error=0 rdata=00000000
+Time: 12190 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=612  read addr=0006000c wdata=00000000: RTL error=0 rdata=0000e21e, C++ model error=0 rdata=ffffe21e
+Time: 12270 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=616  read addr=00014010 wdata=00000000: RTL error=0 rdata=0000007f, C++ model error=0 rdata=00000000
+Time: 12350 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=622  read addr=00060010 wdata=00000000: RTL error=0 rdata=0000ffd5, C++ model error=0 rdata=ffffffd5
+Time: 12470 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=627  read addr=00014014 wdata=00000000: RTL error=0 rdata=0000007f, C++ model error=0 rdata=00000032
+Time: 12570 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=631  read addr=00060014 wdata=00000000: RTL error=0 rdata=00011d11, C++ model error=0 rdata=00001d11
+Time: 12650 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+COMPUTE_CYCLES 251
+Error: MODEL_MISMATCH edge=1173  read addr=00014000 wdata=00000000: RTL error=0 rdata=0000007f, C++ model error=0 rdata=ffffff80
+Time: 23490 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=1176  read addr=00060000 wdata=00000000: RTL error=0 rdata=0000c7ff, C++ model error=0 rdata=ffffc7ff
+Time: 23550 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=1189  read addr=00014008 wdata=00000000: RTL error=0 rdata=0000007f, C++ model error=0 rdata=0000001e
+Time: 23810 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=1193  read addr=00060008 wdata=00000000: RTL error=0 rdata=000105e4, C++ model error=0 rdata=000005e4
+Time: 23890 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=1199  read addr=0001400c wdata=00000000: RTL error=0 rdata=0000007f, C++ model error=0 rdata=0000002f
+Time: 24010 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+Error: MODEL_MISMATCH edge=1204  read addr=0006000c wdata=00000000: RTL error=0 rdata=00010d5b, C++ model error=0 rdata=00000d5b
+Time: 24110 ns  Iteration: 0  Process: /core_tb/Always103_270  Scope: core_tb.ta_model_scoreboard::response  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 92
+COMPUTE_CYCLES 611
+COMPUTE_CYCLES 707
+COMPUTE_CYCLES 579
+COMPUTE_CYCLES 2131
+COMPUTE_CYCLES 1031
+COMPUTE_CYCLES 62723
+COMPUTE_CYCLES 522
+COMPUTE_CYCLES 693
+COMPUTE_CYCLES 840
+COMPUTE_CYCLES 882
+COMPUTE_CYCLES 1214
+COMPUTE_CYCLES 1279
+COMPUTE_CYCLES 1320
+COMPUTE_CYCLES 1175
+COMPUTE_CYCLES 1320
+COMPUTE_CYCLES 1279
+COMPUTE_CYCLES 1214
+COMPUTE_CYCLES 882
+COMPUTE_CYCLES 840
+COMPUTE_CYCLES 693
+COMPUTE_CYCLES 522
+COMPUTE_CYCLES 32045
+COMPUTE_CYCLES 32045
+COMPUTE_CYCLES 32045
+COMPUTE_CYCLES 32045
+COMPUTE_CYCLES 32045
+COMPUTE_CYCLES 32045
+COMPUTE_CYCLES 32045
+COMPUTE_CYCLES 32045
+Fatal: MODEL_MISMATCH mismatches=16639 compared=107662 transactions=107662
+Time: 17718260 ns  Iteration: 0  Process: /core_tb/Initial130_271  Scope: core_tb  File: C:/projects/tensor-accelerator/tb/core_tb.sv Line: 172
+$finish called at time : 17718260 ns
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:08 . Memory (MB): peak = 205.809 ; gain = 0.043
+exit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 17 15:13:39 2026...
+EXIT_CODE=0

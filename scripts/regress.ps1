@@ -16,6 +16,10 @@ function Step([string]$Name,[scriptblock]$Body) {
 Step pytest { & "$PSScriptRoot/run-python.ps1" -m pytest tests -q }
 Step persistent_console { & "$PSScriptRoot/run-python.ps1" -m tests.check_persistent_console }
 Step vectors { & "$PSScriptRoot/run-python.ps1" -m host.ta.vectors }
+Step cmodel {
+    & wsl.exe -d Ubuntu --cd /mnt/c/projects/tensor-accelerator --exec bash scripts/run-cmodel.sh
+    if($LASTEXITCODE -ne 0){throw "C++ model tests exit $LASTEXITCODE"}
+}
 Step board_plan { & "$PSScriptRoot/run-python.ps1" -m host.ta.board_plan --sample 0 }
 Step board_tcl {
     & 'C:\intelFPGA_lite\24.1std\quartus\bin64\tclsh86.exe' "$ProjectRoot/tests/check_board_tcl.tcl"

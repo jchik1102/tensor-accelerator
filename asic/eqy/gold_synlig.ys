@@ -1,0 +1,14 @@
+# Elaborate the tile's RTL with Synlig (Surelog/UHDM), the SystemVerilog
+# frontend OpenLane used for the run (USE_SYNLIG), and save it as RTLIL for
+# asic/eqy/tile.eqy. Run in the OpenLane 2.3.10 image by asic/eqy/run.sh.
+plugin -i synlig-sv
+read_systemverilog -top ta_asic_tile rtl/ta_pe.sv rtl/ta_array.sv rtl/ta_requant.sv asic/ta_asic_tile.sv
+hierarchy -top ta_asic_tile
+prep -top ta_asic_tile -flatten
+# Synthesis re-encoded the requantizer's 3-bit phase register as a 5-bit
+# one-hot state (the flow's log: FSM_RECODE, "auto" encoding). Apply the same
+# Yosys FSM pass here, in the same Yosys version, so the gold has the gate's
+# state encoding; this recoding step is trusted, not proven.
+fsm
+opt_clean
+write_rtlil build/eqy/tile_gold/gold_synlig.il

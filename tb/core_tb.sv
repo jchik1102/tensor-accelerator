@@ -43,6 +43,74 @@ module core_tb;
         assert (!dut.d_we || dut.output_valid) else $fatal(1,"BOUNDARY_ASSERTION");
         assert (!(dut.load_a_q && dut.stream_q) && !(dut.load_b_q && dut.stream_q)) else $fatal(1,"CACHE_OWNERSHIP_ASSERTION");
     end
+    // Scoreboard: the C++ model of ta_core (cmodel/, compiled into the XSim
+    // DPI library) sees every bus access the core accepts and every reset, with
+    // the clock edge each happened on, and predicts each response; every RTL
+    // response must match it (error flag and read data). The model is
+    // cycle-exact for job length, so this also checks the busy window, the
+    // CYCLES and LAYER registers and what a reset in the middle of a job keeps.
+    // +SCOREBOARD_ONLY turns off the vector file's own read checks, to show
+    // the scoreboard catches the RTL mutations by itself.
+    import "DPI-C" function chandle ta_model_new(input int array_n);
+    import "DPI-C" function void ta_model_reset(input chandle model, input longint cycle);
+    import "DPI-C" function void ta_model_access(input chandle model, input longint cycle, input bit write,
+        input int unsigned addr, input int unsigned wdata, output bit error, output int unsigned rdata);
+    class ta_model_scoreboard extends uvm_scoreboard;
+        chandle model;
+        typedef struct { longint cycle; bit write; logic [31:0] addr, wdata; bit error; logic [31:0] rdata; } expect_t;
+        expect_t pending[$];
+        int compared = 0, mismatches = 0, resets = 0;
+        function new(string name, int array_n);
+            super.new(name, null);
+            model = ta_model_new(array_n);
+        endfunction
+        function void reset(longint cycle);
+            ta_model_reset(model, cycle);
+            pending.delete();
+            resets++;
+        endfunction
+        function void request(longint cycle, bit write, logic [31:0] addr, logic [31:0] wdata);
+            expect_t e;
+            bit error;
+            int unsigned rdata;
+            ta_model_access(model, cycle, write, addr, wdata, error, rdata);
+            e.cycle = cycle; e.write = write; e.addr = addr; e.wdata = wdata; e.error = error; e.rdata = rdata;
+            pending.push_back(e);
+        endfunction
+        function void response(bit error, logic [31:0] rdata);
+            expect_t e;
+            if (pending.size() == 0) begin
+                mismatches++;
+                $error("MODEL_MISMATCH response with no accepted request");
+                return;
+            end
+            e = pending.pop_front();
+            compared++;
+            if (error !== e.error || rdata !== e.rdata) begin
+                mismatches++;
+                if (mismatches <= 20)
+                    $error("MODEL_MISMATCH edge=%0d %s addr=%h wdata=%h: RTL error=%b rdata=%h, C++ model error=%b rdata=%h",
+                           e.cycle, e.write ? "write" : "read", e.addr, e.wdata, error, rdata, e.error, e.rdata);
+            end
+        endfunction
+    endclass
+    ta_model_scoreboard scoreboard;
+    longint edge_number = 0;
+    bit in_reset = 0;
+    bit scoreboard_only = 0;
+    // Sampled before the edge's nonblocking updates: a request with valid and
+    // ready high is accepted on this edge, and a response high is consumed here.
+    always @(posedge clk) begin
+        edge_number++;
+        if (reset) begin
+            if (!in_reset) scoreboard.reset(edge_number);
+            in_reset = 1;
+        end else begin
+            in_reset = 0;
+            if (rsp_valid) scoreboard.response(rsp_error, rsp_rdata);
+            if (req_valid && req_ready) scoreboard.request(edge_number, req_write, req_addr, req_wdata);
+        end
+    end
     task automatic transact(input bit wr,input logic[31:0] address,data,input bit expected_error,output logic[31:0] value);
         assert(item.randomize()) else $fatal(1,"RANDOMIZE_FAILED");
         assert(item.gap>=0 && item.gap<=3) else $fatal(1,"RANDOM_ILLEGAL");
@@ -61,6 +129,7 @@ module core_tb;
     logic [31:0] a,b,c,d,value;
     initial begin
         item=new("gap");coverage=new;
+        scoreboard=new("scoreboard",ARRAY_N);scoreboard_only=$test$plusargs("SCOREBOARD_ONLY");
         if(!$value$plusargs("VECTORS=%s",path)) path="../vectors/core.txt";
         fd=$fopen(path,"r");if(!fd)$fatal(1,"No vectors %s",path);
         repeat(4)@(negedge clk);reset=0;
@@ -75,7 +144,7 @@ module core_tb;
                 "W":transact(1,a,b,c[0],value);
                 "R":begin
                     transact(0,a,0,c[0],value);
-                    if(value!==b)$fatal(1,"MISMATCH line=%0d addr=%h expected=%h actual=%h",line_number,a,b,value);
+                    if(value!==b && !scoreboard_only)$fatal(1,"MISMATCH line=%0d addr=%h expected=%h actual=%h",line_number,a,b,value);
                     checks++;
                 end
                 "P":begin
@@ -99,6 +168,9 @@ module core_tb;
         end
         repeat(4)@(negedge clk);
         foreach(gap_hits[i]) if(gap_hits[i]==0)$fatal(1,"NO_GAP_VARIATION");
+        if(scoreboard.mismatches!=0 || scoreboard.compared!=transactions)
+            $fatal(1,"MODEL_MISMATCH mismatches=%0d compared=%0d transactions=%0d",scoreboard.mismatches,scoreboard.compared,transactions);
+        $display("MODEL_SCOREBOARD_PASS compared=%0d resets=%0d array_n=%0d",scoreboard.compared,scoreboard.resets,ARRAY_N);
         $display("CORE_PASS checks=%0d transactions=%0d assertion_hits=%0d coverage=%0.2f gaps=%0d,%0d,%0d,%0d digest=%08h",checks,transactions,assertion_hits,coverage.get_inst_coverage(),gap_hits[0],gap_hits[1],gap_hits[2],gap_hits[3],gap_digest);
         $finish;
     end

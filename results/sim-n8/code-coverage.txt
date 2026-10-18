@@ -1,0 +1,22 @@
+XSim code coverage (core_tb_n8): statement, branch and condition, merged over every run
+design under test: instances under core_tb.dut; testbench modules excluded
+
+module                                       inst          statements            branches          conditions
+ta_array(N=8)                                   1      0/0         n/a      0/0         n/a      0/0         n/a
+ta_core(ARRAY_N=8)                              1    289/295    97.97%    129/135    95.56%    262/282    92.91%
+ta_pe                                          64     13/13    100.00%      5/5     100.00%      0/0         n/a
+ta_ram                                          8     15/15    100.00%      2/2     100.00%      0/0         n/a
+ta_ram(DEPTH=1024,ADDR_WIDTH=10)                8     15/15    100.00%      2/2     100.00%      0/0         n/a
+ta_ram(WIDTH=32,DEPTH=3072,ADDR_WIDTH=12)       1     15/15    100.00%      2/2     100.00%      0/0         n/a
+ta_ram(WIDTH=32,DEPTH=4096,ADDR_WIDTH=12)       1     15/15    100.00%      2/2     100.00%      0/0         n/a
+ta_ram(WIDTH=64,DEPTH=128,ADDR_WIDTH=7)        16     15/15    100.00%      2/2     100.00%      0/0         n/a
+ta_requant                                      1     36/37     97.30%     14/15     93.33%      7/8      87.50%
+ta_vector_ram(N=8)                              1      2/2     100.00%      0/0         n/a      0/0         n/a
+ta_vector_ram(N=8,AW=16)                        1      2/2     100.00%      0/0         n/a      0/0         n/a
+TOTAL                                                417/424    98.35%    158/165    95.76%    269/290    92.76%
+
+Lines with a statement that never executed:
+ta_core(ARRAY_N=8) (rtl/ta_core.sv): 145, 146, 229, 263
+ta_requant (rtl/ta_requant.sv): 51
+
+CODE_COVERAGE core_tb_n8 statements=417/424 (98.35%) branches=158/165 (95.76%) conditions=269/290 (92.76%)

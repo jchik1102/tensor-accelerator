@@ -189,3 +189,38 @@ router's own repair left 60 antenna nets; a higher threshold left 17. The
 selected run keeps the fewest antenna violations. The diodes are why its
 slew, cap and fanout warnings are higher than the other runs'. None of the
 four runs is clean on every check, and the README lists what remains.
+
+## 7. A C++ model as the core bench's scoreboard
+
+**What was built.** `cmodel/` models `ta_core` at the bus-transaction level
+in C++17: a `ta::Core` class answers each register or memory access the way
+the RTL does, a `Descriptor` class holds a layer and its checks, and
+`ta::requantize` is the requantizer. CMake builds it with three unit tests.
+XSim compiles the same sources into the DPI-C library, and a scoreboard in
+`tb/core_tb.sv` compares every RTL response with the model's.
+
+**Why model timing at all?** Whether an access is refused as busy, and what
+the CYCLES and LAYER registers read, depend on the clock edge. A model with
+no timing could only check reads made while the core is idle, so it would
+have to skip status polls, the busy-rejection tests and the reads after a
+reset in the middle of a job. The core's job length follows from its state
+sequence (a fixed number of cycles per state, per tile, per output), so the
+model computes it when the job starts, and the bench passes the clock edge
+of each access. The model then predicts every response exactly, with no
+special cases, and a wrong cycle count in either the RTL or the model shows
+up as a mismatch.
+
+**Why compute the whole job at the start?** No bus access may change the
+memories while the core is busy (the RTL refuses them), so the job's result
+depends only on the memories at the start command. The model computes the
+job then and keeps each output store with the edge it lands on, and applies
+them as time passes. A reset applies the stores from before its edge and
+drops the rest, which is what the RTL leaves in memory.
+
+**Why a scoreboard next to the vector file, not instead of it?** The vector
+file's expected values come from the Python model, written separately; the
+C++ model was written from the RTL and its register map. Keeping both means
+two independent references, and the bench's existing results (checks,
+coverage, gap digests) stay identical. `+SCOREBOARD_ONLY` turns the vector
+checks off, so the regression can show the scoreboard catches each mutation
+by itself.

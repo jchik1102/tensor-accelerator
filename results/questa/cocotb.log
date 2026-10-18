@@ -1,0 +1,198 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.15, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\jonat\.venvs\cocotb-win\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\projects\tensor-accelerator
+collecting ... collected 2 items
+
+tb/cocotb/test_cocotb.py::test_requant ** Warning: (vlib-34) Library already exists at "top".
+Errors: 0, Warnings: 1
+Reading pref.tcl
+
+# 2024.3
+
+# vsim -quiet -c -onfinish exit -pli "C:/Users/jonat/.venvs/cocotb-win/Lib/site-packages/cocotb/libs/cocotbvpi_modelsim.dll" top.ta_requant -do "run -all; quit" 
+# Start time: 15:14:38 on Oct 17,2026
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vsim-3865) Due to PLI being present, global +acc is being enabled automatically. This will cause your simulation to run very slowly. Please use vsim -no_autoacc to disable this feature. This feature is now deprecated and will be removed from future releases.
+# ** Warning: (vopt-10908) Some optimizations are turned off because the +acc switch is in effect.
+# ** Note: (vopt-143) Recognized 1 FSM in module "ta_requant(fast)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=2.
+# //  Questa Intel Starter FPGA Edition-64
+# //  Version 2024.3 win64 Sep 10 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+#      -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: 'C:\Users\jonat\AppData\Local\Programs\Python\Python313\python313.dll'
+#      -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:234  in gpi_load_users                  Running entry func 'initialize' from loaded library 'C:\Users\jonat\.venvs\cocotb-win\Lib\site-packages\cocotb\simulator.cp313-win_amd64.pyd'
+#      -.--ns INFO     pygpi                              ..ib\pygpi\embed.cpp:115  in initialize                      Using Python 3.13.8 interpreter at C:\Users\jonat\.venvs\cocotb-win\Scripts\python.exe
+#      -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+#      -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: FLI support registered
+# run -all
+#      0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1792275280
+# 
+#      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from C:\Users\jonat\.venvs\cocotb-win\Lib\site-packages\cocotb
+# 
+#      0.00ns INFO     cocotb.initialize                  Running on ModelSim for Questa Intel Starter FPGA Edition-64 version 2024.1 2024.09
+# 
+#      0.00ns INFO     cocotb.regression                  Running tests
+# 
+#      0.00ns INFO     cocotb.regression                  running requant_tests.directed_edges (1/4)
+# 
+#                                                             Integer extremes, zero, unit and maximum multipliers, shift extremes and exact ties.
+# 
+#   1215.00ns INFO     cocotb.ta_requant                  REQUANT_DIRECTED_PASS cases=20
+# 
+#   1215.00ns INFO     cocotb.regression                  requant_tests.directed_edges passed
+# 
+#   1215.00ns INFO     cocotb.regression                  running requant_tests.constrained_random (2/4)
+# 
+#                                                             Weighted random operations until every coverage bin is hit (at least 4,000 operations).
+# 
+# 241230.00ns INFO     cocotb.ta_requant                  REQUANT_RANDOM_PASS ops=4000 bins=15/15
+# 
+# 241230.00ns INFO     cocotb.regression                  requant_tests.constrained_random passed
+# 
+# 241230.00ns INFO     cocotb.regression                  running requant_tests.start_while_busy_is_ignored (3/4)
+# 
+#                                                             A second start during an operation must not change its result or restart it.
+# 
+# 241305.00ns INFO     cocotb.ta_requant                  REQUANT_BUSY_START_PASS
+# 
+# 241305.00ns INFO     cocotb.regression                  requant_tests.start_while_busy_is_ignored passed
+# 
+# 241305.00ns INFO     cocotb.regression                  running requant_tests.reset_mid_operation (4/4)
+# 
+#                                                             Reset during an operation clears it: no done pulse afterwards.
+# 
+# 241510.00ns INFO     cocotb.ta_requant                  REQUANT_RESET_PASS
+# 
+# 241510.00ns INFO     cocotb.regression                  requant_tests.reset_mid_operation passed
+# 
+# 241510.00ns INFO     cocotb.regression                  ***************************************************************************************************
+# 
+#                                                         ** TEST                                       STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+# 
+#                                                         ***************************************************************************************************
+# 
+#                                                         ** requant_tests.directed_edges                PASS        1215.00           0.08      16160.46  **
+# 
+#                                                         ** requant_tests.constrained_random            PASS      240015.00          19.93      12044.39  **
+# 
+#                                                         ** requant_tests.start_while_busy_is_ignored   PASS          75.00           0.00      69169.05  **
+# 
+#                                                         ** requant_tests.reset_mid_operation           PASS         205.00           0.00      90917.15  **
+# 
+#                                                         ***************************************************************************************************
+# 
+#                                                         ** TESTS=4 PASS=4 FAIL=0 SKIP=0                          241510.00          20.16      11979.08  **
+# 
+#                                                         ***************************************************************************************************
+# 
+# ** Note: $finish
+#    Time: 241510003 ps  Iteration: 2  Instance: /ta_requant File: C:/projects/tensor-accelerator/rtl/ta_requant.sv
+# End time: 15:15:01 on Oct 17,2026, Elapsed time: 0:00:23
+# Errors: 0, Warnings: 2
+PASSED
+tb/cocotb/test_cocotb.py::test_tile ** Warning: (vlib-34) Library already exists at "top".
+Errors: 0, Warnings: 1
+** Warning: C:\projects\tensor-accelerator\rtl\ta_array.sv(4): (vlog-13314) Defaulting port 'left' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+** Warning: C:\projects\tensor-accelerator\rtl\ta_array.sv(4): (vlog-13314) Defaulting port 'top' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+Reading pref.tcl
+
+# 2024.3
+
+# vsim -quiet -c -onfinish exit -pli "C:/Users/jonat/.venvs/cocotb-win/Lib/site-packages/cocotb/libs/cocotbvpi_modelsim.dll" top.ta_asic_tile -do "run -all; quit" 
+# Start time: 15:15:03 on Oct 17,2026
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vsim-3865) Due to PLI being present, global +acc is being enabled automatically. This will cause your simulation to run very slowly. Please use vsim -no_autoacc to disable this feature. This feature is now deprecated and will be removed from future releases.
+# ** Warning: (vopt-10908) Some optimizations are turned off because the +acc switch is in effect.
+# ** Warning: C:\projects\tensor-accelerator\rtl\ta_array.sv(4): (vopt-13314) Defaulting port 'left' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: C:\projects\tensor-accelerator\rtl\ta_array.sv(4): (vopt-13314) Defaulting port 'top' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Note: (vopt-143) Recognized 1 FSM in module "ta_requant(fast)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=4.
+# //  Questa Intel Starter FPGA Edition-64
+# //  Version 2024.3 win64 Sep 10 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+#      -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: 'C:\Users\jonat\AppData\Local\Programs\Python\Python313\python313.dll'
+#      -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:234  in gpi_load_users                  Running entry func 'initialize' from loaded library 'C:\Users\jonat\.venvs\cocotb-win\Lib\site-packages\cocotb\simulator.cp313-win_amd64.pyd'
+#      -.--ns INFO     pygpi                              ..ib\pygpi\embed.cpp:115  in initialize                      Using Python 3.13.8 interpreter at C:\Users\jonat\.venvs\cocotb-win\Scripts\python.exe
+#      -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+#      -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: FLI support registered
+# run -all
+#      0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1792275305
+# 
+#      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from C:\Users\jonat\.venvs\cocotb-win\Lib\site-packages\cocotb
+# 
+#      0.00ns INFO     cocotb.initialize                  Running on ModelSim for Questa Intel Starter FPGA Edition-64 version 2024.1 2024.09
+# 
+#      0.00ns INFO     cocotb.regression                  Running tests
+# 
+#      0.00ns INFO     cocotb.regression                  running tile_tests.extreme_operands (1/3)
+# 
+#                                                             All -128 x -128 and 127 x -128 products at K = 64: the largest accumulator magnitudes.
+# 
+#   2135.00ns INFO     cocotb.ta_asic_tile                TILE_EXTREMES_PASS
+# 
+#   2135.00ns INFO     cocotb.regression                  tile_tests.extreme_operands passed
+# 
+#   2135.00ns INFO     cocotb.regression                  running tile_tests.random_products (2/3)
+# 
+#                                                             Random sizes K = 1..64 with random bias, multiplier, shift and ReLU on every lane.
+# 
+#  46420.00ns INFO     cocotb.ta_asic_tile                TILE_RANDOM_PASS products=8 lanes=512
+# 
+#  46420.00ns INFO     cocotb.regression                  tile_tests.random_products passed
+# 
+#  46420.00ns INFO     cocotb.regression                  running tile_tests.clear_between_products (3/3)
+# 
+#                                                             Back-to-back products must not leak accumulators: clear resets every PE.
+# 
+#  62415.00ns INFO     cocotb.ta_asic_tile                TILE_CLEAR_PASS lanes=192
+# 
+#  62415.00ns INFO     cocotb.regression                  tile_tests.clear_between_products passed
+# 
+#  62415.00ns INFO     cocotb.regression                  *******************************************************************************************
+# 
+#                                                         ** TEST                               STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+# 
+#                                                         *******************************************************************************************
+# 
+#                                                         ** tile_tests.extreme_operands         PASS        2135.00           0.09      23434.14  **
+# 
+#                                                         ** tile_tests.random_products          PASS       44285.00           2.06      21487.58  **
+# 
+#                                                         ** tile_tests.clear_between_products   PASS       15995.00           0.95      16810.84  **
+# 
+#                                                         *******************************************************************************************
+# 
+#                                                         ** TESTS=3 PASS=3 FAIL=0 SKIP=0                   62415.00           3.25      19190.82  **
+# 
+#                                                         *******************************************************************************************
+# 
+# ** Note: $finish
+#    Time: 62415002 ps  Iteration: 2  Instance: /ta_asic_tile File: C:/projects/tensor-accelerator/asic/ta_asic_tile.sv
+# End time: 15:15:08 on Oct 17,2026, Elapsed time: 0:00:05
+# Errors: 0, Warnings: 4
+PASSED
+
+============================= 2 passed in 30.97s ==============================

@@ -1,0 +1,25 @@
+# vsim -c quant_tb_opt -l sim.log -do "run -all; quit -f" 
+# Start time: 15:14:36 on Oct 17,2026
+# //  Questa Intel Starter FPGA Edition-64
+# //  Version 2024.3 win64 Sep 10 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.quant_tb(fast)
+# run -all
+# ** Fatal: QUANT_MISMATCH value=80000000 mult=00000001 shift=32 relu=0 expected=00 actual=ff
+#    Time: 1620 ns  Scope: quant_tb File: C:/projects/tensor-accelerator/tb/quant_tb.sv Line: 22
+# ** Note: $finish    : C:/projects/tensor-accelerator/tb/quant_tb.sv(22)
+#    Time: 1620 ns  Iteration: 1  Instance: /quant_tb
+# End time: 15:14:37 on Oct 17,2026, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0

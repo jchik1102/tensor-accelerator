@@ -1,0 +1,77 @@
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+_________________________________ test_requant _________________________________
+
+    def test_requant():
+>       run("ta_requant", ["rtl/ta_requant.sv"], "requant_tests")
+
+tb/cocotb/test_cocotb.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+top = 'ta_requant', sources = ['rtl/ta_requant.sv'], module = 'requant_tests'
+
+    def run(top, sources, module):
+        runner = get_runner(SIM)
+        build = HERE / "sim_build" / (top if SIM == "icarus" else f"{SIM}_{top}")
+        runner.build(sources=[ROOT / s for s in sources], hdl_toplevel=top, build_dir=build,
+                     build_args=["-g2012"] if SIM == "icarus" else [], defines={MUTATION: 1} if MUTATION else {}, always=True)
+        # Questa finds the compiled library in its working directory, so it runs in the build directory.
+>       runner.test(hdl_toplevel=top, test_module=module, test_dir=HERE if SIM == "icarus" else build, build_dir=build)
+E       SystemExit: 1
+
+tb/cocotb/test_cocotb.py:31: SystemExit
+----------------------------- Captured stdout call -----------------------------
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/home/jonat/.venvs/tensor-accelerator/lib/python3.12/site-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
+     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /home/jonat/.venvs/tensor-accelerator/bin/python
+     -.--ns ERROR    pygpi                              ..ib/pygpi/embed.cpp:168  in initialize                      Unexpected sys.executable value (expected '/home/jonat/.venvs/tensor-accelerator/bin/python', got '/home/jonat/oss-cad-suite/bin/tabbypy3')
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1792271751
+     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /home/jonat/.venvs/tensor-accelerator/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
+     0.00ns INFO     cocotb.regression                  Running tests
+     0.00ns INFO     cocotb.regression                  running requant_tests.directed_edges (1/4)
+                                                            Integer extremes, zero, unit and maximum multipliers, shift extremes and exact ties.
+   795.00ns WARNING  cocotb.regression                  requant_tests.directed_edges failed
+                                                        Traceback (most recent call last):
+                                                          File "/mnt/c/projects/tensor-accelerator/tb/cocotb/requant_tests.py", line 99, in directed_edges
+                                                            await check(dut, *case)
+                                                          File "/mnt/c/projects/tensor-accelerator/tb/cocotb/requant_tests.py", line 83, in check
+                                                            assert got == want, f"requant({value}, {multiplier}, {shift}, relu={relu}) = {got}, want {want}"
+                                                        AssertionError: requant(5, 1, 1, relu=False) = 3, want 2
+                                                        assert 3 == 2
+   795.00ns INFO     cocotb.regression                  running requant_tests.constrained_random (2/4)
+                                                            Weighted random operations until every coverage bin is hit (at least 4,000 operations).
+  1110.00ns WARNING  cocotb.regression                  requant_tests.constrained_random failed
+                                                        Traceback (most recent call last):
+                                                          File "/mnt/c/projects/tensor-accelerator/tb/cocotb/requant_tests.py", line 128, in constrained_random
+                                                            await check(dut, value, multiplier, shift, relu, covered)
+                                                          File "/mnt/c/projects/tensor-accelerator/tb/cocotb/requant_tests.py", line 83, in check
+                                                            assert got == want, f"requant({value}, {multiplier}, {shift}, relu={relu}) = {got}, want {want}"
+                                                        AssertionError: requant(-69, 1, 1, relu=False) = -35, want -34
+                                                        assert -35 == -34
+  1110.00ns INFO     cocotb.regression                  running requant_tests.start_while_busy_is_ignored (3/4)
+                                                            A second start during an operation must not change its result or restart it.
+  1185.00ns INFO     cocotb.ta_requant                  REQUANT_BUSY_START_PASS
+  1185.00ns INFO     cocotb.regression                  requant_tests.start_while_busy_is_ignored passed
+  1185.00ns INFO     cocotb.regression                  running requant_tests.reset_mid_operation (4/4)
+                                                            Reset during an operation clears it: no done pulse afterwards.
+  1390.00ns INFO     cocotb.ta_requant                  REQUANT_RESET_PASS
+  1390.00ns INFO     cocotb.regression                  requant_tests.reset_mid_operation passed
+  1390.00ns INFO     cocotb.regression                  ***************************************************************************************************
+                                                        ** TEST                                       STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        ***************************************************************************************************
+                                                        ** requant_tests.directed_edges                FAIL         795.00           0.00     324468.47  **
+                                                        ** requant_tests.constrained_random            FAIL         315.00           0.00     293322.85  **
+                                                        ** requant_tests.start_while_busy_is_ignored   PASS          75.00           0.00     215716.84  **
+                                                        ** requant_tests.reset_mid_operation           PASS         205.00           0.00     384108.76  **
+                                                        ***************************************************************************************************
+                                                        ** TESTS=4 PASS=2 FAIL=2 SKIP=0                            1390.00           0.01     134098.70  **
+                                                        ***************************************************************************************************
+------------------------------ Captured log call -------------------------------
+INFO     Icarus:runner.py:734 Running command iverilog -o /mnt/c/projects/tensor-accelerator/tb/cocotb/sim_build/ta_requant/sim.vvp -s ta_requant -g2012 -DTA_MUTATE_ROUND=1 -g2012 /mnt/c/projects/tensor-accelerator/rtl/ta_requant.sv in directory /mnt/c/projects/tensor-accelerator/tb/cocotb/sim_build/ta_requant
+INFO     Icarus:runner.py:734 Running command vvp -m /home/jonat/.venvs/tensor-accelerator/lib/python3.12/site-packages/cocotb/libs/libcocotbvpi_icarus.so /mnt/c/projects/tensor-accelerator/tb/cocotb/sim_build/ta_requant/sim.vvp -none in directory /mnt/c/projects/tensor-accelerator/tb/cocotb
+ERROR    Icarus:runner.py:674 ERROR: Failed 2 of 4 tests.
+=========================== short test summary info ============================
+FAILED tb/cocotb/test_cocotb.py::test_requant - SystemExit: 1
+1 failed, 1 passed in 7.10s

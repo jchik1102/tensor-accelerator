@@ -1,0 +1,58 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Fri Oct 16 01:28:27 2026
+| Host         : Jonathan running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -hierarchical_depth 4 -file C:/projects/tensor-accelerator/build/vivado/n4/utilization_hierarchy.txt
+| Design       : ta_core
+| Device       : xc7a100tcsg324-1
+| Speed File   : -1
+| Design State : Routed
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++--------------------------+-------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+|         Instance         |             Module            | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs | RAMB36 | RAMB18 | DSP Blocks |
++--------------------------+-------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+| ta_core                  |                         (top) |       5227 |       5227 |       0 |    0 | 3948 |     24 |     12 |          6 |
+|   (ta_core)              |                         (top) |       1806 |       1806 |       0 |    0 | 2698 |      0 |      0 |          2 |
+|   a_ram                  |                 ta_vector_ram |        158 |        158 |       0 |    0 |    2 |      0 |      4 |          0 |
+|     banks[3].ram         |     ta_ram__parameterized0_27 |         61 |         61 |       0 |    0 |    0 |      0 |      1 |          0 |
+|   array_unit             |                      ta_array |       1461 |       1461 |       0 |    0 |  961 |      0 |      0 |          0 |
+|     rows[0].cols[0].pe   |                         ta_pe |        100 |        100 |       0 |    0 |   65 |      0 |      0 |          0 |
+|     rows[0].cols[1].pe   |                      ta_pe_10 |         82 |         82 |       0 |    0 |   64 |      0 |      0 |          0 |
+|     rows[0].cols[2].pe   |                      ta_pe_11 |         82 |         82 |       0 |    0 |   64 |      0 |      0 |          0 |
+|     rows[0].cols[3].pe   |                      ta_pe_12 |        128 |        128 |       0 |    0 |   56 |      0 |      0 |          0 |
+|     rows[1].cols[0].pe   |                      ta_pe_13 |         91 |         91 |       0 |    0 |   64 |      0 |      0 |          0 |
+|     rows[1].cols[1].pe   |                      ta_pe_14 |        107 |        107 |       0 |    0 |   64 |      0 |      0 |          0 |
+|     rows[1].cols[2].pe   |                      ta_pe_15 |        107 |        107 |       0 |    0 |   64 |      0 |      0 |          0 |
+|     rows[1].cols[3].pe   |                      ta_pe_16 |        128 |        128 |       0 |    0 |   56 |      0 |      0 |          0 |
+|     rows[2].cols[0].pe   |                      ta_pe_17 |         91 |         91 |       0 |    0 |   64 |      0 |      0 |          0 |
+|     rows[2].cols[1].pe   |                      ta_pe_18 |        107 |        107 |       0 |    0 |   64 |      0 |      0 |          0 |
+|     rows[2].cols[2].pe   |                      ta_pe_19 |        107 |        107 |       0 |    0 |   64 |      0 |      0 |          0 |
+|     rows[2].cols[3].pe   |                      ta_pe_20 |        128 |        128 |       0 |    0 |   56 |      0 |      0 |          0 |
+|     rows[3].cols[0].pe   |                      ta_pe_21 |         53 |         53 |       0 |    0 |   56 |      0 |      0 |          0 |
+|     rows[3].cols[1].pe   |                      ta_pe_22 |         85 |         85 |       0 |    0 |   56 |      0 |      0 |          0 |
+|     rows[3].cols[2].pe   |                      ta_pe_23 |         85 |         85 |       0 |    0 |   56 |      0 |      0 |          0 |
+|     rows[3].cols[3].pe   |                      ta_pe_24 |        106 |        106 |       0 |    0 |   48 |      0 |      0 |          0 |
+|   cache_lanes[0].b_cache |                      ta_ram_0 |         61 |         61 |       0 |    0 |    0 |      0 |      1 |          0 |
+|   cache_lanes[1].b_cache |                      ta_ram_2 |         65 |         65 |       0 |    0 |    0 |      0 |      1 |          0 |
+|   cache_lanes[2].b_cache |                      ta_ram_4 |         61 |         61 |       0 |    0 |    0 |      0 |      1 |          0 |
+|   cache_lanes[3].b_cache |                      ta_ram_6 |         65 |         65 |       0 |    0 |    0 |      0 |      1 |          0 |
+|   d_ram                  |        ta_ram__parameterized3 |         59 |         59 |       0 |    0 |    0 |      4 |      0 |          0 |
+|   p_ram                  |        ta_ram__parameterized2 |        489 |        489 |       0 |    0 |    0 |      4 |      0 |          0 |
+|   quant_unit             |                    ta_requant |        780 |        780 |       0 |    0 |  285 |      0 |      0 |          4 |
+|   w_ram                  | ta_vector_ram__parameterized0 |        107 |        107 |       0 |    0 |    2 |     16 |      0 |          0 |
+|     banks[1].ram         |      ta_ram__parameterized1_7 |         50 |         50 |       0 |    0 |    0 |      4 |      0 |          0 |
++--------------------------+-------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

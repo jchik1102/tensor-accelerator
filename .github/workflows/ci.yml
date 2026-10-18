@@ -1,4 +1,4 @@
-# What runs on GitHub-hosted runners: the Python tests and the ASIC tile's
+# What runs on GitHub-hosted runners: the Python tests, the cocotb tests and the ASIC tile's
 # RTL simulation against the Python reference (Icarus Verilog). The XSim
 # regression and Quartus builds need the Windows vendor tools, and the
 # OpenLane flow takes about 40 minutes; both run locally.
@@ -20,6 +20,20 @@ jobs:
       # tests/test_fpga_demo.py drives the mock board session through Quartus's
       # Windows tclsh, so it runs only locally (make models).
       - run: python -m pytest tests -q --ignore=tests/test_fpga_demo.py
+
+  cocotb:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: YosysHQ/setup-oss-cad-suite@v3
+        with:
+          version: '2026-10-14'
+      - run: python -m pip install cocotb==2.1.0 find_libpython==0.5.1 pytest==9.1.1
+      # Runs the cocotb tests, then requires them to fail on the RTL's PE and rounding mutations.
+      - run: make cocotb VENV="$pythonLocation"
 
   asic-tile-sim:
     runs-on: ubuntu-24.04

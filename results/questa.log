@@ -1,0 +1,9 @@
+quant_tb_n4                  PASS QUANT_PASS cases=2070
+adapter_tb_n4                PASS ADAPTER_PASS checks=56
+quant_tb_n8                  PASS QUANT_PASS cases=2070
+adapter_tb_n8                PASS ADAPTER_PASS checks=56
+quant_tb_mutate_round        MUTATION_DETECTED QUANT_MISMATCH value=80000000 mult=00000001 shift=32 relu=0 expected=00 actual=ff
+cocotb                       PASS ** TESTS=4 PASS=4 FAIL=0 SKIP=0; ** TESTS=3 PASS=3 FAIL=0 SKIP=0
+cocotb TA_MUTATE_PE          COCOTB_MUTATION_DETECTED TA_MUTATE_PE
+cocotb TA_MUTATE_ROUND       COCOTB_MUTATION_DETECTED TA_MUTATE_ROUND
+QUESTA_PASS

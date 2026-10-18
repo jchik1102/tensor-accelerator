@@ -3,7 +3,7 @@
   **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
   **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
   **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-  **** Start of session at: Thu Oct 15 18:16:53 2026
+  **** Start of session at: Sat Oct 17 15:11:27 2026
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 
@@ -63,9 +63,11 @@ COMPUTE_CYCLES 32045
 COMPUTE_CYCLES 32045
 COMPUTE_CYCLES 32045
 COMPUTE_CYCLES 32045
+MODEL_SCOREBOARD_PASS compared=107667 resets=8 array_n=4
 CORE_PASS checks=21264 transactions=107667 assertion_hits=107667 coverage=100.00 gaps=25432,25431,27979,28825 digest=f8400a09
-$finish called at time : 17655720 ns : File "C:/projects/tensor-accelerator/tb/core_tb.sv" Line 103
-run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:08 . Memory (MB): peak = 205.918 ; gain = 0.078
+$finish called at time : 17655720 ns : File "C:/projects/tensor-accelerator/tb/core_tb.sv" Line 175
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:12 . Memory (MB): peak = 207.477 ; gain = 0.047
 exit
-INFO: [Common 17-206] Exiting xsim at Thu Oct 15 18:17:03 2026...
+INFO: xsimkernel Simulation Memory Usage: 54640 KB (Peak: 54640 KB), Simulation CPU Usage: 12359 ms
+INFO: [Common 17-206] Exiting xsim at Sat Oct 17 15:11:42 2026...
 EXIT_CODE=0

@@ -1,0 +1,80 @@
+.F                                                                       [100%]
+=================================== FAILURES ===================================
+__________________________________ test_tile ___________________________________
+
+    def test_tile():
+>       run("ta_asic_tile", ["rtl/ta_pe.sv", "rtl/ta_array.sv", "rtl/ta_requant.sv", "asic/ta_asic_tile.sv"], "tile_tests")
+
+tb/cocotb/test_cocotb.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+top = 'ta_asic_tile'
+sources = ['rtl/ta_pe.sv', 'rtl/ta_array.sv', 'rtl/ta_requant.sv', 'asic/ta_asic_tile.sv']
+module = 'tile_tests'
+
+    def run(top, sources, module):
+        runner = get_runner(SIM)
+        build = HERE / "sim_build" / (top if SIM == "icarus" else f"{SIM}_{top}")
+        runner.build(sources=[ROOT / s for s in sources], hdl_toplevel=top, build_dir=build,
+                     build_args=["-g2012"] if SIM == "icarus" else [], defines={MUTATION: 1} if MUTATION else {}, always=True)
+        # Questa finds the compiled library in its working directory, so it runs in the build directory.
+>       runner.test(hdl_toplevel=top, test_module=module, test_dir=HERE if SIM == "icarus" else build, build_dir=build)
+E       SystemExit: 1
+
+tb/cocotb/test_cocotb.py:31: SystemExit
+----------------------------- Captured stdout call -----------------------------
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/home/jonat/.venvs/tensor-accelerator/lib/python3.12/site-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
+     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /home/jonat/.venvs/tensor-accelerator/bin/python
+     -.--ns ERROR    pygpi                              ..ib/pygpi/embed.cpp:168  in initialize                      Unexpected sys.executable value (expected '/home/jonat/.venvs/tensor-accelerator/bin/python', got '/home/jonat/oss-cad-suite/bin/tabbypy3')
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1792271745
+     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /home/jonat/.venvs/tensor-accelerator/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
+     0.00ns INFO     cocotb.regression                  Running tests
+     0.00ns INFO     cocotb.regression                  running tile_tests.extreme_operands (1/3)
+                                                            All -128 x -128 and 127 x -128 products at K = 64: the largest accumulator magnitudes.
+  1975.00ns WARNING  cocotb.regression                  tile_tests.extreme_operands failed
+                                                        Traceback (most recent call last):
+                                                          File "/mnt/c/projects/tensor-accelerator/tb/cocotb/tile_tests.py", line 114, in extreme_operands
+                                                            assert acc == 64 * av * bv, f"lane {lane}: {acc}"
+                                                        AssertionError: lane 0: 1056768
+                                                        assert 1056768 == ((64 * 127) * -128)
+  1975.00ns INFO     cocotb.regression                  running tile_tests.random_products (2/3)
+                                                            Random sizes K = 1..64 with random bias, multiplier, shift and ReLU on every lane.
+  2430.00ns WARNING  cocotb.regression                  tile_tests.random_products failed
+                                                        Traceback (most recent call last):
+                                                          File "/mnt/c/projects/tensor-accelerator/tb/cocotb/tile_tests.py", line 122, in random_products
+                                                            lanes = await run_products(dut, random.Random(20261016), products=8, max_k=64)
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/mnt/c/projects/tensor-accelerator/tb/cocotb/tile_tests.py", line 97, in run_products
+                                                            assert acc == total + bias, f"product {t} lane {lane}: acc {acc} != {total + bias}"
+                                                        AssertionError: product 0 lane 0: acc -187024675 != -187385123
+                                                        assert -187024675 == (-36905 + -187348218)
+  2430.00ns INFO     cocotb.regression                  running tile_tests.clear_between_products (3/3)
+                                                            Back-to-back products must not leak accumulators: clear resets every PE.
+  2735.00ns WARNING  cocotb.regression                  tile_tests.clear_between_products failed
+                                                        Traceback (most recent call last):
+                                                          File "/mnt/c/projects/tensor-accelerator/tb/cocotb/tile_tests.py", line 131, in clear_between_products
+                                                            lanes = await run_products(dut, rng, products=3, max_k=4)
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/mnt/c/projects/tensor-accelerator/tb/cocotb/tile_tests.py", line 97, in run_products
+                                                            assert acc == total + bias, f"product {t} lane {lane}: acc {acc} != {total + bias}"
+                                                        AssertionError: product 0 lane 0: acc -1795806988 != -1795872524
+                                                        assert -1795806988 == (-2636 + -1795869888)
+  2735.00ns INFO     cocotb.regression                  *******************************************************************************************
+                                                        ** TEST                               STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        *******************************************************************************************
+                                                        ** tile_tests.extreme_operands         FAIL        1975.00           0.01     140430.28  **
+                                                        ** tile_tests.random_products          FAIL         455.00           0.00     144014.32  **
+                                                        ** tile_tests.clear_between_products   FAIL         305.00           0.00     155542.96  **
+                                                        *******************************************************************************************
+                                                        ** TESTS=3 PASS=0 FAIL=3 SKIP=0                    2735.00           0.03     100571.85  **
+                                                        *******************************************************************************************
+------------------------------ Captured log call -------------------------------
+INFO     Icarus:runner.py:734 Running command iverilog -o /mnt/c/projects/tensor-accelerator/tb/cocotb/sim_build/ta_asic_tile/sim.vvp -s ta_asic_tile -g2012 -DTA_MUTATE_PE=1 -g2012 /mnt/c/projects/tensor-accelerator/rtl/ta_pe.sv /mnt/c/projects/tensor-accelerator/rtl/ta_array.sv /mnt/c/projects/tensor-accelerator/rtl/ta_requant.sv /mnt/c/projects/tensor-accelerator/asic/ta_asic_tile.sv in directory /mnt/c/projects/tensor-accelerator/tb/cocotb/sim_build/ta_asic_tile
+INFO     Icarus:runner.py:734 Running command vvp -m /home/jonat/.venvs/tensor-accelerator/lib/python3.12/site-packages/cocotb/libs/libcocotbvpi_icarus.so /mnt/c/projects/tensor-accelerator/tb/cocotb/sim_build/ta_asic_tile/sim.vvp -none in directory /mnt/c/projects/tensor-accelerator/tb/cocotb
+ERROR    Icarus:runner.py:674 ERROR: Failed 3 of 3 tests.
+=========================== short test summary info ============================
+FAILED tb/cocotb/test_cocotb.py::test_tile - SystemExit: 1
+1 failed, 1 passed in 9.02s

@@ -1,0 +1,24 @@
+# vsim -c adapter_tb_opt -l sim.log -do "run -all; quit -f" 
+# Start time: 15:14:28 on Oct 17,2026
+# //  Questa Intel Starter FPGA Edition-64
+# //  Version 2024.3 win64 Sep 10 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.adapter_tb(fast)
+# run -all
+# ADAPTER_PASS checks=56
+# ** Note: $finish    : C:/projects/tensor-accelerator/tb/adapter_tb.sv(58)
+#    Time: 10620 ns  Iteration: 1  Instance: /adapter_tb
+# End time: 15:14:28 on Oct 17,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0

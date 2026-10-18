@@ -1,0 +1,28 @@
+# Equivalence of rtl/ta_pe.sv (gold) and the OpenLane netlist of the single-PE
+# run (gate, sky130_fd_sc_hd cells, functions read from the liberty file).
+# Run by asic/eqy/run.sh, which fills in LIB and NETLIST; stubs.v holds empty
+# modules for the fill and tap cells (asic/eqy/netlist_stubs.py).
+[gold]
+read_verilog -sv ta_pe.sv
+prep -top ta_pe
+# Name internal bits like the netlist does (product[3]), so EQY matches them.
+splitnets
+
+[gate]
+read_liberty -ignore_miss_func LIB
+read_verilog stubs.v
+read_verilog NETLIST
+hierarchy -top ta_pe
+flatten
+# What is left of the cell library after flattening is the cells with no
+# logic (fill, tap, decap): delete their instances and their (boxed) modules.
+delete t:sky130_*
+delete =A:blackbox
+hierarchy -top ta_pe
+opt_clean
+splitnets -driver
+
+[strategy sby]
+use sby
+depth 3
+engine smtbmc bitwuzla

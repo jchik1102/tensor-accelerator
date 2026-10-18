@@ -1,0 +1,273 @@
+F.                                                                       [100%]
+================================== FAILURES ===================================
+________________________________ test_requant _________________________________
+
+    def test_requant():
+>       run("ta_requant", ["rtl/ta_requant.sv"], "requant_tests")
+
+tb\cocotb\test_cocotb.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+top = 'ta_requant', sources = ['rtl/ta_requant.sv'], module = 'requant_tests'
+
+    def run(top, sources, module):
+        runner = get_runner(SIM)
+        build = HERE / "sim_build" / (top if SIM == "icarus" else f"{SIM}_{top}")
+        runner.build(sources=[ROOT / s for s in sources], hdl_toplevel=top, build_dir=build,
+                     build_args=["-g2012"] if SIM == "icarus" else [], defines={MUTATION: 1} if MUTATION else {}, always=True)
+        # Questa finds the compiled library in its working directory, so it runs in the build directory.
+>       runner.test(hdl_toplevel=top, test_module=module, test_dir=HERE if SIM == "icarus" else build, build_dir=build)
+E       SystemExit: 1
+
+tb\cocotb\test_cocotb.py:31: SystemExit
+---------------------------- Captured stdout call -----------------------------
+** Warning: (vlib-34) Library already exists at "top".
+
+Errors: 0, Warnings: 1
+
+Reading pref.tcl
+
+
+
+# 2024.3
+
+
+
+# vsim -quiet -c -onfinish exit -pli "C:/Users/jonat/.venvs/cocotb-win/Lib/site-packages/cocotb/libs/cocotbvpi_modelsim.dll" top.ta_requant -do "run -all; quit" 
+
+# Start time: 15:15:43 on Oct 17,2026
+
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+
+# ** Warning: (vsim-3865) Due to PLI being present, global +acc is being enabled automatically. This will cause your simulation to run very slowly. Please use vsim -no_autoacc to disable this feature. This feature is now deprecated and will be removed from future releases.
+
+# ** Warning: (vopt-10908) Some optimizations are turned off because the +acc switch is in effect.
+
+# ** Note: (vopt-143) Recognized 1 FSM in module "ta_requant(fast)".
+
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=2.
+
+# //  Questa Intel Starter FPGA Edition-64
+
+# //  Version 2024.3 win64 Sep 10 2024
+
+# //
+
+# // Unpublished work. Copyright 2024 Siemens
+
+# //
+
+# // This material contains trade secrets or otherwise confidential information
+
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+
+# // limited as set forth in the Customer's applicable agreements with SISW.
+
+# //
+
+# // This material may not be copied, distributed, or otherwise disclosed outside
+
+# // of the Customer's facilities without the express written permission of SISW,
+
+# // and may not be used in any way not expressly authorized by SISW.
+
+# //
+
+#      -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: 'C:\Users\jonat\AppData\Local\Programs\Python\Python313\python313.dll'
+
+#      -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:234  in gpi_load_users                  Running entry func 'initialize' from loaded library 'C:\Users\jonat\.venvs\cocotb-win\Lib\site-packages\cocotb\simulator.cp313-win_amd64.pyd'
+
+#      -.--ns INFO     pygpi                              ..ib\pygpi\embed.cpp:115  in initialize                      Using Python 3.13.8 interpreter at C:\Users\jonat\.venvs\cocotb-win\Scripts\python.exe
+
+#      -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+
+#      -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: FLI support registered
+
+# run -all
+
+#      0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1792275344
+
+# 
+
+#      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from C:\Users\jonat\.venvs\cocotb-win\Lib\site-packages\cocotb
+
+# 
+
+#      0.00ns INFO     cocotb.initialize                  Running on ModelSim for Questa Intel Starter FPGA Edition-64 version 2024.1 2024.09
+
+# 
+
+#      0.00ns INFO     cocotb.regression                  Running tests
+
+# 
+
+#      0.00ns INFO     cocotb.regression                  running requant_tests.directed_edges (1/4)
+
+# 
+
+#                                                             Integer extremes, zero, unit and maximum multipliers, shift extremes and exact ties.
+
+# 
+
+#    795.00ns WARNING  cocotb.regression                  requant_tests.directed_edges failed
+
+# 
+
+#                                                         Traceback (most recent call last):
+
+# 
+
+#                                                           File "C:\projects\tensor-accelerator\tb\cocotb\requant_tests.py", line 99, in directed_edges
+
+# 
+
+#                                                             await check(dut, *case)
+
+# 
+
+#                                                           File "C:\projects\tensor-accelerator\tb\cocotb\requant_tests.py", line 83, in check
+
+# 
+
+#                                                             assert got == want, f"requant({value}, {multiplier}, {shift}, relu={relu}) = {got}, want {want}"
+
+# 
+
+#                                                         AssertionError: requant(5, 1, 1, relu=False) = 3, want 2
+
+# 
+
+#                                                         assert 3 == 2
+
+# 
+
+#    795.00ns INFO     cocotb.regression                  running requant_tests.constrained_random (2/4)
+
+# 
+
+#                                                             Weighted random operations until every coverage bin is hit (at least 4,000 operations).
+
+# 
+
+#   1110.00ns WARNING  cocotb.regression                  requant_tests.constrained_random failed
+
+# 
+
+#                                                         Traceback (most recent call last):
+
+# 
+
+#                                                           File "C:\projects\tensor-accelerator\tb\cocotb\requant_tests.py", line 128, in constrained_random
+
+# 
+
+#                                                             await check(dut, value, multiplier, shift, relu, covered)
+
+# 
+
+#                                                           File "C:\projects\tensor-accelerator\tb\cocotb\requant_tests.py", line 83, in check
+
+# 
+
+#                                                             assert got == want, f"requant({value}, {multiplier}, {shift}, relu={relu}) = {got}, want {want}"
+
+# 
+
+#                                                         AssertionError: requant(-69, 1, 1, relu=False) = -35, want -34
+
+# 
+
+#                                                         assert -35 == -34
+
+# 
+
+#   1110.00ns INFO     cocotb.regression                  running requant_tests.start_while_busy_is_ignored (3/4)
+
+# 
+
+#                                                             A second start during an operation must not change its result or restart it.
+
+# 
+
+#   1185.00ns INFO     cocotb.ta_requant                  REQUANT_BUSY_START_PASS
+
+# 
+
+#   1185.00ns INFO     cocotb.regression                  requant_tests.start_while_busy_is_ignored passed
+
+# 
+
+#   1185.00ns INFO     cocotb.regression                  running requant_tests.reset_mid_operation (4/4)
+
+# 
+
+#                                                             Reset during an operation clears it: no done pulse afterwards.
+
+# 
+
+#   1390.00ns INFO     cocotb.ta_requant                  REQUANT_RESET_PASS
+
+# 
+
+#   1390.00ns INFO     cocotb.regression                  requant_tests.reset_mid_operation passed
+
+# 
+
+#   1390.00ns INFO     cocotb.regression                  ***************************************************************************************************
+
+# 
+
+#                                                         ** TEST                                       STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+
+# 
+
+#                                                         ***************************************************************************************************
+
+# 
+
+#                                                         ** requant_tests.directed_edges                FAIL         795.00           0.08      10156.10  **
+
+# 
+
+#                                                         ** requant_tests.constrained_random            FAIL         315.00           0.00     200841.62  **
+
+# 
+
+#                                                         ** requant_tests.start_while_busy_is_ignored   PASS          75.00           0.00     210970.46  **
+
+# 
+
+#                                                         ** requant_tests.reset_mid_operation           PASS         205.00           0.00     346869.71  **
+
+# 
+
+#                                                         ***************************************************************************************************
+
+# 
+
+#                                                         ** TESTS=4 PASS=2 FAIL=2 SKIP=0                            1390.00           0.24       5837.54  **
+
+# 
+
+#                                                         ***************************************************************************************************
+
+# 
+
+# ** Note: $finish
+
+#    Time: 1390003 ps  Iteration: 2  Instance: /ta_requant File: C:/projects/tensor-accelerator/rtl/ta_requant.sv
+
+# End time: 15:15:45 on Oct 17,2026, Elapsed time: 0:00:02
+
+# Errors: 0, Warnings: 2
+
+------------------------------ Captured log call ------------------------------
+INFO     Questa:runner.py:734 Running command vlib top in directory C:\projects\tensor-accelerator\tb\cocotb\sim_build\questa_ta_requant
+INFO     Questa:runner.py:734 Running command vlog -quiet -work top -sv +define+TA_MUTATE_ROUND=1 'C:\projects\tensor-accelerator\rtl\ta_requant.sv' in directory C:\projects\tensor-accelerator\tb\cocotb\sim_build\questa_ta_requant
+INFO     Questa:runner.py:734 Running command vsim -quiet -c -onfinish exit -pli C:/Users/jonat/.venvs/cocotb-win/Lib/site-packages/cocotb/libs/cocotbvpi_modelsim.dll top.ta_requant -do 'run -all; quit' in directory C:\projects\tensor-accelerator\tb\cocotb\sim_build\questa_ta_requant
+ERROR    Questa:runner.py:674 ERROR: Failed 2 of 4 tests.
+=========================== short test summary info ===========================
+FAILED tb/cocotb/test_cocotb.py::test_requant - SystemExit: 1
+1 failed, 1 passed in 12.23s

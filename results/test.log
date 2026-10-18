@@ -1,13 +1,44 @@
-START 2026-10-15T18:15:30.6030263-07:00 commit f76ece4ef0e543bc4cb7e64d4cd4bd7162bb15f9
+START 2026-10-17T15:10:16.3105137-07:00 commit e093348c11b9a8781df3a4d4b817860aaeb9513b
 === STEP pytest
 ..................................                                       [100%]
-34 passed in 6.93s
-=== STEP_PASS pytest 8s
+34 passed in 4.13s
+=== STEP_PASS pytest 4s
 === STEP persistent_console
-PERSISTENT_CONSOLE_MOCK_PASS /mnt/c/projects/tensor-accelerator/artifacts/test-persistent/system-console-232e5d70fed14c4faba6fa9abd6cb387
+PERSISTENT_CONSOLE_MOCK_PASS /mnt/c/projects/tensor-accelerator/artifacts/test-persistent/system-console-71b9c44f7406489a8e5b72c4e2020003
 === STEP_PASS persistent_console 9s
 === STEP vectors
 === STEP_PASS vectors 1s
+=== STEP cmodel
+gmake[1]: Warning: File 'CMakeFiles/Makefile2' has modification time 0.045 s in the future
+gmake[2]: Warning: File 'CMakeFiles/ta_model.dir/compiler_depend.make' has modification time 0.098 s in the future
+gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[ 25%] Built target ta_model
+gmake[2]: Warning: File 'CMakeFiles/test_core.dir/compiler_depend.make' has modification time 0.12 s in the future
+gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[ 50%] Built target test_core
+gmake[2]: Warning: File 'CMakeFiles/test_requant.dir/compiler_depend.make' has modification time 0.062 s in the future
+gmake[2]: Warning: File 'CMakeFiles/test_replay.dir/compiler_depend.make' has modification time 0.063 s in the future
+gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[100%] Built target test_requant
+[100%] Built target test_replay
+gmake[1]: warning:  Clock skew detected.  Your build may be incomplete.
+1: requantization cases from /mnt/c/projects/tensor-accelerator/artifacts/vectors/quant.txt: 2070
+1: TEST_PASS test_requant checks=2082 failures=0
+1/4 Test #1: requant ..........................   Passed    0.01 sec
+2: array 4x4: one-layer job 1383 cycles
+2: array 8x8: one-layer job 3462 cycles
+2: TEST_PASS test_core checks=4338 failures=0
+2/4 Test #2: core .............................   Passed    0.00 sec
+3: replayed 99986 lines: 21152 reads, 112 jobs polled
+3: TEST_PASS test_replay checks=121182 failures=0
+3/4 Test #3: replay_4x4 .......................   Passed    0.08 sec
+4: replayed 99986 lines: 21152 reads, 112 jobs polled
+4: TEST_PASS test_replay checks=121182 failures=0
+4/4 Test #4: replay_8x8 .......................   Passed    0.07 sec
+100% tests passed, 0 tests failed out of 4
+CMODEL_PASS g++ 13.3.0, cmake 3.28.3
+=== STEP_PASS cmodel 2s
 === STEP board_plan
 Prepared /mnt/c/projects/tensor-accelerator/artifacts/board/inference.tcl; not executed. Expected digit: 7
 === STEP_PASS board_plan 1s
@@ -22,6 +53,7 @@ OFFLINE_TCL_PASS scratch patterns/restoration, wrong-ID guard, source completene
 === STEP_PASS board_tcl 0s
 === STEP sim_n4
 compile-clean exit=0
+dpi-clean exit=0
 elaborate-quant_tb-clean exit=0
 elaborate-core_tb-clean exit=0
 elaborate-adapter_tb-clean exit=0
@@ -33,9 +65,12 @@ core-42 exit=0
 coverage-42 exit=0
 core-20261008 exit=0
 coverage-20261008 exit=0
-=== STEP_PASS sim_n4 74s
+code-coverage exit=0
+CODE_COVERAGE core_tb_n4 statements=405/412 (98.30%) branches=142/149 (95.30%) conditions=189/210 (90.00%)
+=== STEP_PASS sim_n4 71s
 === STEP sim_n8
 compile-clean exit=0
+dpi-clean exit=0
 elaborate-quant_tb-clean exit=0
 elaborate-core_tb-clean exit=0
 elaborate-adapter_tb-clean exit=0
@@ -47,41 +82,52 @@ core-42 exit=0
 coverage-42 exit=0
 core-20261008 exit=0
 coverage-20261008 exit=0
-=== STEP_PASS sim_n8 65s
+code-coverage exit=0
+CODE_COVERAGE core_tb_n8 statements=417/424 (98.35%) branches=158/165 (95.76%) conditions=269/290 (92.76%)
+=== STEP_PASS sim_n8 86s
 === STEP mutation_pe
 compile-pe exit=0
+dpi-pe exit=0
 elaborate-quant_tb-pe exit=0
 elaborate-core_tb-pe exit=0
 elaborate-adapter_tb-pe exit=0
 mutation-pe exit=0
 MUTATION_DETECTED pe
-=== STEP_PASS mutation_pe 21s
+mutation-pe-scoreboard exit=0
+SCOREBOARD_MUTATION_DETECTED pe
+=== STEP_PASS mutation_pe 30s
 === STEP mutation_round
 compile-round exit=0
+dpi-round exit=0
 elaborate-quant_tb-round exit=0
 elaborate-core_tb-round exit=0
 elaborate-adapter_tb-round exit=0
 mutation-round exit=0
 MUTATION_DETECTED round
-=== STEP_PASS mutation_round 20s
+mutation-round-scoreboard exit=0
+SCOREBOARD_MUTATION_DETECTED round
+=== STEP_PASS mutation_round 30s
 === STEP mutation_bank_n8
 compile-bank exit=0
+dpi-bank exit=0
 elaborate-quant_tb-bank exit=0
 elaborate-core_tb-bank exit=0
 elaborate-adapter_tb-bank exit=0
 mutation-bank exit=0
 MUTATION_DETECTED bank
-=== STEP_PASS mutation_bank_n8 21s
+mutation-bank-scoreboard exit=0
+SCOREBOARD_MUTATION_DETECTED bank
+=== STEP_PASS mutation_bank_n8 31s
 === STEP replay_n4
 REPLAY_PASS seed=42 exact result, activity, gap counts and ordered gap digest
-=== STEP_PASS replay_n4 11s
+=== STEP_PASS replay_n4 15s
 === STEP hex_n8
 
-run.log:14:[7mADAPTER_PASS[0m checks=56
-=== STEP_PASS hex_n8 6s
+run.log:14:ADAPTER_PASS checks=56
+=== STEP_PASS hex_n8 5s
 === STEP hex_n4_defect
 HEX_MUTATION_DETECTED digit3_segment_a
-=== STEP_PASS hex_n4_defect 6s
-END 2026-10-15T18:19:35.1612117-07:00 FAILED_STEPS=[]
+=== STEP_PASS hex_n4_defect 5s
+END 2026-10-17T15:15:06.4668298-07:00 FAILED_STEPS=[]
 REGRESSION_PASS
 

@@ -1,0 +1,77 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /home/jonat/.venvs/tensor-accelerator/bin/python
+cachedir: .pytest_cache
+rootdir: /mnt/c/projects/tensor-accelerator
+collecting ... collected 2 items
+
+tb/cocotb/test_cocotb.py::test_requant      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/home/jonat/.venvs/tensor-accelerator/lib/python3.12/site-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
+     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /home/jonat/.venvs/tensor-accelerator/bin/python
+     -.--ns ERROR    pygpi                              ..ib/pygpi/embed.cpp:168  in initialize                      Unexpected sys.executable value (expected '/home/jonat/.venvs/tensor-accelerator/bin/python', got '/home/jonat/oss-cad-suite/bin/tabbypy3')
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1792271734
+     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /home/jonat/.venvs/tensor-accelerator/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
+     0.00ns INFO     cocotb.regression                  Running tests
+     0.00ns INFO     cocotb.regression                  running requant_tests.directed_edges (1/4)
+                                                            Integer extremes, zero, unit and maximum multipliers, shift extremes and exact ties.
+  1215.00ns INFO     cocotb.ta_requant                  REQUANT_DIRECTED_PASS cases=20
+  1215.00ns INFO     cocotb.regression                  requant_tests.directed_edges passed
+  1215.00ns INFO     cocotb.regression                  running requant_tests.constrained_random (2/4)
+                                                            Weighted random operations until every coverage bin is hit (at least 4,000 operations).
+241230.00ns INFO     cocotb.ta_requant                  REQUANT_RANDOM_PASS ops=4000 bins=15/15
+241230.00ns INFO     cocotb.regression                  requant_tests.constrained_random passed
+241230.00ns INFO     cocotb.regression                  running requant_tests.start_while_busy_is_ignored (3/4)
+                                                            A second start during an operation must not change its result or restart it.
+241305.00ns INFO     cocotb.ta_requant                  REQUANT_BUSY_START_PASS
+241305.00ns INFO     cocotb.regression                  requant_tests.start_while_busy_is_ignored passed
+241305.00ns INFO     cocotb.regression                  running requant_tests.reset_mid_operation (4/4)
+                                                            Reset during an operation clears it: no done pulse afterwards.
+241510.00ns INFO     cocotb.ta_requant                  REQUANT_RESET_PASS
+241510.00ns INFO     cocotb.regression                  requant_tests.reset_mid_operation passed
+241510.00ns INFO     cocotb.regression                  ***************************************************************************************************
+                                                        ** TEST                                       STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        ***************************************************************************************************
+                                                        ** requant_tests.directed_edges                PASS        1215.00           0.00     316649.34  **
+                                                        ** requant_tests.constrained_random            PASS      240015.00           0.67     357243.96  **
+                                                        ** requant_tests.start_while_busy_is_ignored   PASS          75.00           0.00      90359.81  **
+                                                        ** requant_tests.reset_mid_operation           PASS         205.00           0.00     347144.02  **
+                                                        ***************************************************************************************************
+                                                        ** TESTS=4 PASS=4 FAIL=0 SKIP=0                          241510.00           0.68     355713.27  **
+                                                        ***************************************************************************************************
+PASSED
+tb/cocotb/test_cocotb.py::test_tile      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/home/jonat/.venvs/tensor-accelerator/lib/python3.12/site-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
+     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /home/jonat/.venvs/tensor-accelerator/bin/python
+     -.--ns ERROR    pygpi                              ..ib/pygpi/embed.cpp:168  in initialize                      Unexpected sys.executable value (expected '/home/jonat/.venvs/tensor-accelerator/bin/python', got '/home/jonat/oss-cad-suite/bin/tabbypy3')
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1792271736
+     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /home/jonat/.venvs/tensor-accelerator/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
+     0.00ns INFO     cocotb.regression                  Running tests
+     0.00ns INFO     cocotb.regression                  running tile_tests.extreme_operands (1/3)
+                                                            All -128 x -128 and 127 x -128 products at K = 64: the largest accumulator magnitudes.
+  2135.00ns INFO     cocotb.ta_asic_tile                TILE_EXTREMES_PASS
+  2135.00ns INFO     cocotb.regression                  tile_tests.extreme_operands passed
+  2135.00ns INFO     cocotb.regression                  running tile_tests.random_products (2/3)
+                                                            Random sizes K = 1..64 with random bias, multiplier, shift and ReLU on every lane.
+ 46420.00ns INFO     cocotb.ta_asic_tile                TILE_RANDOM_PASS products=8 lanes=512
+ 46420.00ns INFO     cocotb.regression                  tile_tests.random_products passed
+ 46420.00ns INFO     cocotb.regression                  running tile_tests.clear_between_products (3/3)
+                                                            Back-to-back products must not leak accumulators: clear resets every PE.
+ 62415.00ns INFO     cocotb.ta_asic_tile                TILE_CLEAR_PASS lanes=192
+ 62415.00ns INFO     cocotb.regression                  tile_tests.clear_between_products passed
+ 62415.00ns INFO     cocotb.regression                  *******************************************************************************************
+                                                        ** TEST                               STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        *******************************************************************************************
+                                                        ** tile_tests.extreme_operands         PASS        2135.00           0.02     138823.00  **
+                                                        ** tile_tests.random_products          PASS       44285.00           0.20     218395.11  **
+                                                        ** tile_tests.clear_between_products   PASS       15995.00           0.07     225366.83  **
+                                                        *******************************************************************************************
+                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0                   62415.00           0.29     215272.62  **
+                                                        *******************************************************************************************
+PASSED
+
+============================== 2 passed in 7.47s ===============================
+COCOTB_MUTATION_DETECTED TA_MUTATE_PE
+COCOTB_MUTATION_DETECTED TA_MUTATE_ROUND

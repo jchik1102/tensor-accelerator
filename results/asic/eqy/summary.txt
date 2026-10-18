@@ -1,0 +1,2 @@
+EQY_PE PASS partitions=5 (DONE (PASS) in pe.log)
+EQY_TILE proved=1184 of 1185 partitions; not proved: ta_asic_tile.quant_unit.product (timeout after 1800 s, no counterexample; run stopped after its solver hung past the limit)

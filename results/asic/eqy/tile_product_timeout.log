@@ -1,0 +1,25 @@
+SBY 22:13:23 [ta_asic_tile.quant_unit.product.0] Removing directory '/mnt/c/projects/tensor-accelerator/build/eqy/tile/tile/strategies/ta_asic_tile.quant_unit.product.0/sby/ta_asic_tile.quant_unit.product.0'.
+SBY 22:13:23 [ta_asic_tile.quant_unit.product.0] engine_0: smtbmc bitwuzla
+SBY 22:13:23 [ta_asic_tile.quant_unit.product.0] base: starting process "cd ta_asic_tile.quant_unit.product.0/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 22:13:31 [ta_asic_tile.quant_unit.product.0] base: finished (returncode=0)
+SBY 22:13:31 [ta_asic_tile.quant_unit.product.0] prep: starting process "cd ta_asic_tile.quant_unit.product.0/model; yosys -ql design_prep.log design_prep.ys"
+SBY 22:13:37 [ta_asic_tile.quant_unit.product.0] prep: finished (returncode=0)
+SBY 22:13:37 [ta_asic_tile.quant_unit.product.0] smt2: starting process "cd ta_asic_tile.quant_unit.product.0/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 22:13:39 [ta_asic_tile.quant_unit.product.0] smt2: finished (returncode=0)
+SBY 22:13:39 [ta_asic_tile.quant_unit.product.0] engine_0.basecase: starting process "cd ta_asic_tile.quant_unit.product.0; yosys-smtbmc -s bitwuzla --presat --unroll --noprogress -t 3  --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2"
+SBY 22:13:39 [ta_asic_tile.quant_unit.product.0] engine_0.basecase: ##   0:00:00  Solver: bitwuzla
+SBY 22:13:41 [ta_asic_tile.quant_unit.product.0] engine_0.basecase: ##   0:00:02  Checking assumptions in step 0..
+SBY 22:13:41 [ta_asic_tile.quant_unit.product.0] engine_0.basecase: ##   0:00:02  Checking assertions in step 0..
+SBY 22:13:42 [ta_asic_tile.quant_unit.product.0] engine_0.basecase: ##   0:00:03  Checking assumptions in step 1..
+SBY 22:13:42 [ta_asic_tile.quant_unit.product.0] engine_0.basecase: ##   0:00:03  Checking assertions in step 1..
+SBY 22:14:42 [ta_asic_tile.quant_unit.product.0] engine_0.basecase: ##   0:01:03  waiting for solver (1 minute)
+SBY 22:18:43 [ta_asic_tile.quant_unit.product.0] engine_0.basecase: ##   0:05:04  waiting for solver (5 minutes)
+SBY 22:23:44 [ta_asic_tile.quant_unit.product.0] engine_0.basecase: ##   0:10:05  waiting for solver (10 minutes)
+SBY 22:28:45 [ta_asic_tile.quant_unit.product.0] engine_0.basecase: ##   0:15:06  waiting for solver (15 minutes)
+SBY 22:43:30 [ta_asic_tile.quant_unit.product.0] Reached TIMEOUT (1800 seconds). Terminating all subprocesses.
+SBY 22:43:30 [ta_asic_tile.quant_unit.product.0] engine_0.basecase: terminating process
+SBY 22:43:31 [ta_asic_tile.quant_unit.product.0] summary: Elapsed clock time [H:MM:SS (secs)]: 0:30:02 (1802)
+SBY 22:43:31 [ta_asic_tile.quant_unit.product.0] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:12 (12)
+SBY 22:43:31 [ta_asic_tile.quant_unit.product.0] summary: engine_0 (smtbmc bitwuzla) did not return a status
+SBY 22:43:31 [ta_asic_tile.quant_unit.product.0] summary: engine_0 did not produce any traces
+SBY 22:43:31 [ta_asic_tile.quant_unit.product.0] DONE (TIMEOUT, rc=0)

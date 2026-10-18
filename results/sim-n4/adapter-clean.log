@@ -3,7 +3,7 @@
   **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
   **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
   **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-  **** Start of session at: Thu Oct 15 18:16:25 2026
+  **** Start of session at: Sat Oct 17 15:10:52 2026
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 
@@ -14,5 +14,5 @@ run -all
 ADAPTER_PASS checks=56
 $finish called at time : 10620 ns : File "C:/projects/tensor-accelerator/tb/adapter_tb.sv" Line 58
 exit
-INFO: [Common 17-206] Exiting xsim at Thu Oct 15 18:16:27 2026...
+INFO: [Common 17-206] Exiting xsim at Sat Oct 17 15:10:54 2026...
 EXIT_CODE=0
